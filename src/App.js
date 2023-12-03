@@ -20,6 +20,7 @@ import Login from './components/Login.jsx';
 import Setting from './pages/Setting/Setting.jsx';
 import MahasiswaTambah from './pages/Mahasiswa/MahasiswaTambah.jsx';
 import DosenTambah from './pages/Dosen/DosenTambah.jsx';
+import PresensiManual from './pages/Presensi/PresensiManual.jsx';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
                 <Route path='/presensi' element={<Presensi />} />
                 <Route path='/presensi/mulai-presensi' element={<MulaiPresensi/>}></Route>
                 <Route path='/presensi/rekap-presensi' element={<RekapPresensi/>}></Route>
+                <Route path='/presensi/presensi-manual' element={<PresensiManual/>}></Route>
                 <Route path='/presensi/mulai-presensi/generate-qrcode' element={<QRcode/>}></Route>
                 <Route path='/setting' element={<Setting />}></Route>
                 <Route path='/mahasiswa/tambah-mahasiswa' element={<MahasiswaTambah/>}></Route>
