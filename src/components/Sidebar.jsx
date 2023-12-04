@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import {
+  Menu,
   Gauge,
   Book,
   User,
   GraduationCap,
   MessageSquare,
   LogOut,
-  Settings
+  Settings,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import RightArrowIcon from "./../assets/icons/rightArrow.svg";
 import LogoIMG from "./../assets/Logo.png";
 
 const withouSidebarRoutes = ["/index", "/login"];
@@ -54,9 +54,9 @@ function Sidebar() {
     >
       <div
         onClick={() => setIsExpanded(!isExpanded)}
-        className="cursor-pointer absolute -right-3 top-10 rounded-full w-6 h-6 bg-tertiary flex justify-center items-center"
+        className="cursor-pointer absolute -right-14 top-4 flex justify-center items-center"
       >
-        <img src={RightArrowIcon} className="w-2" alt="right-arrow" />
+        <Menu className="w-8 h-8"/>
       </div>
 
       <div className="flex items-center justify-center mt-8 text-white text-3xl font-semibold">
@@ -68,17 +68,15 @@ function Sidebar() {
           <NavLink
             key={index}
             to={item.route}
-            className={`flex items-center px-10  space-x-3 w-full py-6 cursor-pointer ${
+            className={`flex justify-center space-x-3 w-full py-6 cursor-pointer ${
               location.pathname.includes(item.route)
                 ? "bg-secondary text-primary"
                 : ""
             }`}
             onClick={() => handleNavClick(item.route)}
           >
-            <div className="flex items-center pr-3 justify-center">
               <item.icon />
-            </div>
-            <span className={isExpanded ? "block" : "hidden"}>{item.name}</span>
+            <span className={isExpanded ? "block w-24" : "hidden"}>{item.name}</span>
           </NavLink>
         ))}
       </div>
