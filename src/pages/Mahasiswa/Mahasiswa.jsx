@@ -47,7 +47,6 @@ function Mahasiswa() {
   // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
 
-
   // const handleTambahMahasiswa = () => {
   //   navigate("/mahasiswa/tambah");
   // };
@@ -69,7 +68,10 @@ function Mahasiswa() {
         </div>
         <div className="bg-white rounded-md mt-7">
           <div className="p-4 mt-2">
-            <Link to={"tambah-mahasiswa"} class="bg-primary hover:bg-blue-700 text-white mb font-bold py-2 px-4 rounded">
+            <Link
+              to={"tambah-mahasiswa"}
+              class="bg-primary hover:bg-blue-700 text-white mb font-bold py-2 px-4 rounded"
+            >
               Tambah Mahasiswa
             </Link>
             <table className="w-full mt-5">

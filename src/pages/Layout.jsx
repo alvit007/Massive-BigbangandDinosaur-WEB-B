@@ -1,8 +1,8 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
-import Sidebar from '../components/Sidebar';
+import React from "react";
+import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 
-function Layout({children}) {
+function Layout({ children }) {
   return (
     <>
       <React.Fragment>
@@ -20,4 +20,4 @@ function Layout({children}) {
   );
 }
 
-export default Layout
+export default Layout;
