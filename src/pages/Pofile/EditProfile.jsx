@@ -42,6 +42,12 @@ function EditProfile() {
                 <span className="text-[#1E73BE] text-[13px] border border-b-[#1E73BE] p-2 ml-3">
                   Edit Profile
                 </span>
+                <Link
+                  to={"/profile/ganti-password"}
+                  className="text-primary text-[13px] p-2"
+                >
+                  Ganti Password
+                </Link>
               </div>
               <div className="flex h-32 items-center mb-2">
                 <span className="text-primary text-xl font-medium w-[100px] ">

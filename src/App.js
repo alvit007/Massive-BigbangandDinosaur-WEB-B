@@ -23,6 +23,7 @@ import DosenTambah from './pages/Dosen/DosenTambah.jsx';
 import PresensiManual from './pages/Presensi/PresensiManual.jsx';
 import Profile from './pages/Pofile/Profile.jsx';
 import EditProfile from './pages/Pofile/EditProfile.jsx';
+import GantiPassword from './pages/Pofile/GantiPassword.jsx';
 
 
 function App() {
@@ -32,7 +33,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Login/>} />
           <Route path='/profile' element={<Profile/>}></Route>
-          <Route path='/profile/edit-profile' element={<EditProfile/>}></Route>
+          <Route path='/profile/edit-profile' element={<EditProfile />}></Route>
+          <Route path='/profile/ganti-password' element={<GantiPassword/>}></Route>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/matakuliah" element={<Matakuliah />} />
           <Route path="/matakuliah/tambah" element={<MatakuliahTambah />} />

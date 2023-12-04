@@ -45,6 +45,12 @@ function Profile() {
                   >
                     Edit Profile
                   </Link>
+                  <Link
+                    to={"ganti-password"}
+                    className="text-primary text-[13px] p-2 ml-3"
+                  >
+                    Ganti Password
+                  </Link>
                 </div>
                 <div className="flex">
                   <div className=" flex flex-col w-[152px] h-[200px] justify-around">

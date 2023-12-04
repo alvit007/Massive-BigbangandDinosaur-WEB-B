@@ -21,7 +21,7 @@ const navLinks = [
   { name: "Mahasiswa", icon: User, route: "/mahasiswa" },
   { name: "Dosen", icon: GraduationCap, route: "/dosen" },
   { name: "Presensi", icon: MessageSquare, route: "/presensi" },
-  { name: "Setting", icon: Settings, route: "/setting" },
+  { name: "Help", icon: Settings, route: "/setting" },
   { name: "Logout", icon: LogOut, route: "/logout" },
 ];
 
@@ -54,9 +54,9 @@ function Sidebar() {
     >
       <div
         onClick={() => setIsExpanded(!isExpanded)}
-        className="cursor-pointer absolute -right-14 top-4 flex justify-center items-center"
+        className="cursor-pointer absolute -right-11 top-3 flex items-center justify-center "
       >
-        <Menu className="w-8 h-8"/>
+        <Menu className="w-8 h-8 text-primary" />
       </div>
 
       <div className="flex items-center justify-center mt-8 text-white text-3xl font-semibold">
@@ -75,8 +75,10 @@ function Sidebar() {
             }`}
             onClick={() => handleNavClick(item.route)}
           >
-              <item.icon />
-            <span className={isExpanded ? "block w-24" : "hidden"}>{item.name}</span>
+            <item.icon />
+            <span className={isExpanded ? "block w-24" : "hidden"}>
+              {item.name}
+            </span>
           </NavLink>
         ))}
       </div>
