@@ -23,6 +23,7 @@ import DosenTambah from './pages/Dosen/DosenTambah.jsx';
 import PresensiManual from './pages/Presensi/PresensiManual.jsx';
 import Profile from './pages/Pofile/Profile.jsx';
 import EditProfile from './pages/Pofile/EditProfile.jsx';
+import Help from './pages/Help/Help.jsx';
 
 
 function App() {
@@ -38,15 +39,15 @@ function App() {
           <Route path="/matakuliah/tambah" element={<MatakuliahTambah />} />
           <Route path="/matakuliah/detail" element={<MatakuliahDetail/>} />
           <Route path="/mahasiswa" element={<Mahasiswa />} />
+          <Route path='/mahasiswa/tambah-mahasiswa' element={<MahasiswaTambah/>}></Route>
           <Route path="/dosen" element={<Dosen />} />
+          <Route path='/dosen/tambah-dosen' element={<DosenTambah />}></Route>
           <Route path='/presensi' element={<Presensi />} />
           <Route path='/presensi/mulai-presensi' element={<MulaiPresensi/>}></Route>
           <Route path='/presensi/rekap-presensi' element={<RekapPresensi/>}></Route>
           <Route path='/presensi/mulai-presensi/presensi-manual' element={<PresensiManual/>}></Route>
           <Route path='/presensi/mulai-presensi/generate-qrcode' element={<QRcode/>}></Route>
-          <Route path='/setting' element={<Setting />}></Route>
-          <Route path='/mahasiswa/tambah-mahasiswa' element={<MahasiswaTambah/>}></Route>
-          <Route path='/dosen/tambah-dosen' element={<DosenTambah />}></Route>
+          <Route path='/help' element={<Help />}></Route>
         </Routes>
     </Router>
     </>

@@ -8,7 +8,7 @@ import {
   GraduationCap,
   MessageSquare,
   LogOut,
-  Settings,
+  Info,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import LogoIMG from "./../assets/Logo.png";
@@ -21,7 +21,7 @@ const navLinks = [
   { name: "Mahasiswa", icon: User, route: "/mahasiswa" },
   { name: "Dosen", icon: GraduationCap, route: "/dosen" },
   { name: "Presensi", icon: MessageSquare, route: "/presensi" },
-  { name: "Setting", icon: Settings, route: "/setting" },
+  { name: "Help", icon: Info, route: "/help" },
   { name: "Logout", icon: LogOut, route: "/logout" },
 ];
 
