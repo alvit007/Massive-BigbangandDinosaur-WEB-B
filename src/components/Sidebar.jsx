@@ -7,7 +7,7 @@ import {
   GraduationCap,
   MessageSquare,
   LogOut,
-  Settings
+  Settings,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import RightArrowIcon from "./../assets/icons/rightArrow.svg";
