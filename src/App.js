@@ -23,12 +23,8 @@ import DosenTambah from './pages/Dosen/DosenTambah.jsx';
 import PresensiManual from './pages/Presensi/PresensiManual.jsx';
 import Profile from './pages/Pofile/Profile.jsx';
 import EditProfile from './pages/Pofile/EditProfile.jsx';
-<<<<<<< HEAD
 import GantiPassword from './pages/Pofile/GantiPassword.jsx';
-=======
 import Help from './pages/Help/Help.jsx';
->>>>>>> d20d81db050f4906c9ef0ebf1acc56c9568da3d8
-
 
 function App() {
   return (
