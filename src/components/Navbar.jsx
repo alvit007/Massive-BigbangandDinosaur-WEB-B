@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -9,9 +10,11 @@ function Navbar() {
           <div className="text-textsm text-sm text-right">Admin</div>
         </div>
         <div className="flex items-center">
+          <Link to={"profile"}>
           <div className="bg-primary rounded-full w-[3rem] h-[3rem] flex justify-center items-center">
             <div className="text-white text-2xl font-bold">A</div>
           </div>
+          </Link>
         </div>
       </div>
     </div>

@@ -86,9 +86,9 @@ function MulaiPresensi() {
                               >
                                 Mulai Presensi
                               </Link>
-                              <button className="bg-primary text-white rounded-lg ml-2 py-2 px-4 hover:bg-[#920202] text-md">
+                              <Link to={"/presensi/mulai-presensi/presensi-manual"} className="bg-primary text-white rounded-lg ml-2 py-2 px-4 hover:bg-[#920202] text-md">
                                 Presensi Manual
-                              </button>
+                              </Link>
                             </td>
                           </tr>
                           <tr className="border-b dark:border-neutral-500">

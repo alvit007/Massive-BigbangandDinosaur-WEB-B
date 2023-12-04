@@ -4,7 +4,7 @@ import Layout from '../Layout'
 function PresensiManual() {
   return (
     <Layout>
-    <div className="flex flex-col py-10 px-16 h-screen overflow-y-auto w-full bg-background">
+    <div className="flex flex-col h-screen w-full bg-background">
       <div className=" flex flex-row justify-between">
         <h1 className="text-3xl font-semibold text-primary">QR Code</h1>
         <h2 className="self-center">
@@ -43,7 +43,7 @@ function PresensiManual() {
                     <option value="S">Sakit</option>
                     <option value="I">Izin</option>
                     <option value="A">Alfa</option>
-                    </select>   </td>
+                    </select>  </td>
               </tr>
               <tr>
                 <td className="border p-2">Rafi Kahfi Yugi</td>
