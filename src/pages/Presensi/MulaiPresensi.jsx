@@ -71,13 +71,13 @@ function MulaiPresensi() {
                               Pertemuan 1
                             </td>
                             <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                              Mark
+                              13-11-23
                             </td>
                             <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                              Otto
+                              Ruang 32-1
                             </td>
                             <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                              @mdo
+                              09.30 - 11.00
                             </td>
                             <td className="whitespace-nowrap px-6 py-4">
                               <Link
@@ -86,7 +86,10 @@ function MulaiPresensi() {
                               >
                                 Mulai Presensi
                               </Link>
-                              <Link to={"/presensi/mulai-presensi/presensi-manual"} className="bg-primary text-white rounded-lg ml-2 py-2 px-4 hover:bg-[#920202] text-md">
+                              <Link
+                                to={"/presensi/mulai-presensi/presensi-manual"}
+                                className="bg-primary text-white rounded-lg ml-2 py-2 px-4 hover:bg-[#920202] text-md"
+                              >
                                 Presensi Manual
                               </Link>
                             </td>
@@ -96,13 +99,13 @@ function MulaiPresensi() {
                               Pertemuan 2
                             </td>
                             <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                              Jacob
+                              13-11-23
                             </td>
                             <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                              Thornton
+                              Ruang 32-1
                             </td>
                             <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                              @fat
+                              09.30 - 11.00
                             </td>
                             <td className="whitespace-nowrap px-6 py-4">
                               <button className="bg-merah text-white rounded-lg py-2 px-4 hover:bg-[#071B4E] text-md">
@@ -118,13 +121,13 @@ function MulaiPresensi() {
                               Pertemuan 3
                             </td>
                             <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                              Larry the Bird
+                              13-11-23
                             </td>
                             <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                              @twitter
+                              Ruang 32-1
                             </td>
                             <td className="whitespace-nowrap border-r  dark:border-neutral-500 px-6 py-4">
-                              tes
+                              09.30 - 11.00
                             </td>
                             <td className="whitespace-nowrap border-r  dark:border-neutral-500 px-6 py-4">
                               <button className="bg-merah text-white rounded-lg py-2 px-4 hover:bg-[#071B4E] text-md">

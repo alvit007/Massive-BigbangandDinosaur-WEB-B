@@ -26,7 +26,7 @@ function DosenTambah() {
                 type="text"
                 name="namaMahasiswa"
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
-                placeholder="Masukkan Nama Mahasiswa"
+                placeholder="Masukkan Nama Dosen"
               />
             </div>
 

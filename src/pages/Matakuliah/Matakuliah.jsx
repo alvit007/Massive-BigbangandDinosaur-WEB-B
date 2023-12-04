@@ -19,7 +19,7 @@ function Matakuliah() {
 
   return (
     <Layout>
-    <div className="flex flex-col h-screen  bg-background">
+    <div className="flex flex-col  bg-background">
       <div className="flex flex-row justify-between mb-[26px]">
         <h1 className="text-3xl font-semibold text-primary">Mata Kuliah</h1>
         <h2 className="text-sky-600 text-xl font-semibold mr-2 self-center">Mata Kuliah</h2>

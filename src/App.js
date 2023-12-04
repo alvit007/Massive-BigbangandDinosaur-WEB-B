@@ -22,6 +22,7 @@ import MahasiswaTambah from './pages/Mahasiswa/MahasiswaTambah.jsx';
 import DosenTambah from './pages/Dosen/DosenTambah.jsx';
 import PresensiManual from './pages/Presensi/PresensiManual.jsx';
 import Profile from './pages/Pofile/Profile.jsx';
+import EditProfile from './pages/Pofile/EditProfile.jsx';
 
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<Login/>} />
+          <Route path='/profile' element={<Profile/>}></Route>
+          <Route path='/profile/edit-profile' element={<EditProfile/>}></Route>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/matakuliah" element={<Matakuliah />} />
           <Route path="/matakuliah/tambah" element={<MatakuliahTambah />} />
@@ -44,7 +47,6 @@ function App() {
           <Route path='/setting' element={<Setting />}></Route>
           <Route path='/mahasiswa/tambah-mahasiswa' element={<MahasiswaTambah/>}></Route>
           <Route path='/dosen/tambah-dosen' element={<DosenTambah />}></Route>
-          <Route path='/profile' element={<Profile/>}></Route>
         </Routes>
     </Router>
     </>

@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import Bg from "./../assets/bg.png";
 import LogoIMG from "./../assets/Logo.png";
 import { Link } from "react-router-dom";
+import { Axios } from "axios";
 
-function Login() {
+function Login({setToken}) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async () => { 
+     try {
+       const response = await Axios.post("API_LOGIN_ENDPOINT", {
+         username,
+         password,
+       });
+
+       const { token } = response.data;
+       setToken(token);
+     } catch (error) {
+       console.error("Login failed", error);
+     }
+
+  }
+
   return (
     <section
       className="bg-merah h-screen flex items-center justify-center"
@@ -27,11 +46,15 @@ function Login() {
               <input
                 type="text"
                 placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 className="border-2 border-grey w-[300px] h-[40px] rounded-md px-2 py-1 mt-5"
               />
               <input
                 type="password"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="border-2 border-grey w-[300px] h-[40px] rounded-md px-2 py-1 mt-5"
               />
             </div>
