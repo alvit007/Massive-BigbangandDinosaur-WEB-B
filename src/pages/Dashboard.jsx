@@ -1,18 +1,41 @@
-import React from 'react'
+import React, { useEffect } from "react";
 import datamining from "./../assets/datamining.png";
 import mobileprogramming from "./../assets/mobileprogramming.png";
 import webprogramming from "./../assets/webprogramming.png";
 import profile from "./../assets/profile.png";
-import Layout from './Layout';
-
+import Layout from "./Layout";
+import axios from "axios";
 function Dashboard() {
+  useEffect(() => {
+    // Mengambil token dari local storage
+    const token = localStorage.getItem("token");
+
+    // Melakukan permintaan HTTP dengan token
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/v1/admin", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        // Menggunakan data dari server
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    };
+
+    if (token) {
+      fetchData();
+    }
+  }, []);
+
   return (
     <>
       <Layout>
         <div className="flex flex-col py-2 px-0 h-screen overflow-y-auto w-full bg-background">
-          <h2 className="text-3xl font-semibold text-primary mb-[25px]">
-            Dashboard
-          </h2>
+          <h2 className="text-3xl font-semibold text-primary mb-[25px]">Dashboard</h2>
           <div className="container bg-white w-[976px] h-[226px] rounded-lg flex justify-evenly">
             <div className="bg-blue-500 h-[147px] w-72 rounded-lg overflow-hidden self-center bg-cover bg-center relative">
               <img
@@ -144,4 +167,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard
+export default Dashboard;

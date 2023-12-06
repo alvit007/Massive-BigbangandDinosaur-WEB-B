@@ -1,7 +1,5 @@
 import React from "react";
 import profile from "../../assets/profile.png";
-import { Upload } from "lucide-react";
-import { Trash2 } from "lucide-react";
 import Layout from "../Layout";
 import { Link } from "react-router-dom";
 
@@ -51,45 +49,43 @@ function GantiPassword() {
             <form action="">
               <div className="mb-4 flex flex-row justify-between">
                 <label className="font-medium text-primary text-1xl flex items-center w-44">
-                  Nama Mahasiswa
+                  Password Lama
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   name="namaMahasiswa"
-                  className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
-                  placeholder="Masukkan Nama Mahasiswa"
+                  className="mt-1 p-2 w-4/5 border rounded-md pl-3 text-primary bg-background"
+                  placeholder="Masukkan Password lama"
                 />
               </div>
 
               <div className="mb-4 flex flex-row justify-between">
                 <label className="font-medium text-primary text-1xl flex items-center w-44">
-                  NPM
+                  Password Baru
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   name="npm"
-                  className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
-                  placeholder="Masukkan NPM"
+                  className="mt-1 p-2 w-4/5 border rounded-md pl-3 text-primary bg-background"
+                  placeholder="Masukkan Password Baru"
                 />
               </div>
               <div className="mb-4 flex flex-row justify-between">
                 <label className="font-medium text-primary text-1xl flex items-center w-44">
-                  NPM
+                  Konfrimasi Password
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   name="npm"
-                  className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
-                  placeholder="Masukkan NPM"
+                  className="mt-1 p-2 w-4/5 border rounded-md pl-3 text-primary bg-background"
+                  placeholder="Masukan Konfirmasi Password"
                 />
               </div>
-
-              <button
-                type="submit"
-                className="bg-primary text-white mx-[188px] p-2 rounded-lg hover:bg-primary-dark w-48 h-12"
-              >
-                Tambah
-              </button>
+              <div className="flex justify-end">
+                <button className="bg-primary text-white rounded-lg px-3 py-2 hover:bg-[#071B4E] text-md ml-2">
+                  Simpan
+                </button>
+              </div>
             </form>
           </div>
         </div>

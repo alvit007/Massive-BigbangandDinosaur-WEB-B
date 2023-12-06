@@ -17,7 +17,6 @@ import MulaiPresensi from './pages/Presensi/MulaiPresensi.jsx';
 import RekapPresensi from './pages/Presensi/RekapPresensi.jsx';
 import QRcode from './pages/Presensi/Qrcode.jsx';
 import Login from './components/Login.jsx';
-import Setting from './pages/Setting/Setting.jsx';
 import MahasiswaTambah from './pages/Mahasiswa/MahasiswaTambah.jsx';
 import DosenTambah from './pages/Dosen/DosenTambah.jsx';
 import PresensiManual from './pages/Presensi/PresensiManual.jsx';
@@ -31,7 +30,7 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path='/' element={<Login/>} />
+          <Route path='/' element={<Login />} />
           <Route path='/profile' element={<Profile/>}></Route>
           <Route path='/profile/edit-profile' element={<EditProfile />}></Route>
           <Route path='/profile/ganti-password' element={<GantiPassword/>}></Route>

@@ -1,63 +1,41 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Trash2 } from "lucide-react";
 import Layout from "../Layout";
+import axios from "axios"
 
 function Mahasiswa() {
-  // const [formData, setFormData] = useState({
-  //   programStudi: "",
-  //   mataKuliah: "",
-  //   kelas: "",
-  // });
+  const [mahasiswaData, setMahasiswa] = useState([])
 
-  const [mahasiswaData, setMahasiswaData] = useState([
-    {
-      nim: "2110631170048",
-      nama: "Alvito Kurnia Fahrio",
-      status: "AKTIF",
-    },
-    {
-      nim: "2110631170139",
-      nama: "Rafi Kahfi Yugi",
-      status: "AKTIF",
-    },
-    {
-      nim: "2110631170139",
-      nama: "Rafi Kahfi Yugi",
-      status: "AKTIF",
-    },
-    {
-      nim: "2110631170139",
-      nama: "Rafi Kahfi Yugi",
-      status: "AKTIF",
-    },
-    {
-      nim: "2110631170139",
-      nama: "Rafi Kahfi Yugi",
-      status: "AKTIF",
-    },
-    {
-      nim: "2110631170139",
-      nama: "Rafi Kahfi Yugi",
-      status: "AKTIF",
-    },
-    // Add more Mahasiswa data as needed
-  ]);
 
-  // eslint-disable-next-line no-unused-vars
-  const navigate = useNavigate();
+  useEffect(() => {
+    // Mengambil token dari local storage
+    const token = localStorage.getItem("token");
 
-  // const handleTambahMahasiswa = () => {
-  //   navigate("/mahasiswa/tambah");
-  // };
+    // Melakukan permintaan HTTP dengan token
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/v1/mahasiswa", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-  const handleDeleteMahasiswa = (index) => {
-    // Implement your logic to delete Mahasiswa at the given index
-    // Update the mahasiswaData state accordingly
-    const updatedData = [...mahasiswaData];
-    updatedData.splice(index, 1);
-    setMahasiswaData(updatedData);
-  };
+        // Menggunakan data dari server
+        setMahasiswa(response.data.values);
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    };
+
+    if (token) {
+      fetchData();
+    }
+  }, []);
+
+
+  
+
 
   return (
     <Layout>
@@ -70,7 +48,7 @@ function Mahasiswa() {
           <div className="p-4 mt-2">
             <Link
               to={"tambah-mahasiswa"}
-              class="bg-primary hover:bg-blue-700 text-white mb font-bold py-2 px-4 rounded"
+              className="bg-primary hover:bg-blue-700 text-white mb font-bold py-2 px-4 rounded"
             >
               Tambah Mahasiswa
             </Link>
@@ -88,15 +66,14 @@ function Mahasiswa() {
                 {mahasiswaData.map((mahasiswa, index) => (
                   <tr key={index}>
                     <td className="border p-2 text-center">{index + 1}</td>
-                    <td className="border p-2 ">{mahasiswa.nim}</td>
-                    <td className="border p-2">{mahasiswa.nama}</td>
+                    <td className="border p-2 ">{mahasiswa.npm}</td>
+                    <td className="border p-2">{mahasiswa.nama_mahasiswa}</td>
                     <td className="border p-2 text-center">
                       {mahasiswa.status}
                     </td>
                     <td className="border p-2 text-center">
                       <button
                         className="color"
-                        onClick={() => handleDeleteMahasiswa(index)}
                       >
                         <Trash2 stroke="#BF0404" />
                       </button>

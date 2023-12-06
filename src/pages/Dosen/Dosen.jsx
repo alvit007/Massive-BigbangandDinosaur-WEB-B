@@ -1,56 +1,34 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Trash2 } from "lucide-react";
 import Layout from "../Layout";
-
+import axios from "axios";
 
 function Dosen() {
-  // const [formData, setFormData] = useState({
-  //   programStudi: "",
-  //   mataKuliah: "",
-  //   kelas: "",
-  // });
+  const [DosenData, setDosenData] = useState([]);
 
-  const [DosenData, setDosenData] = useState([
-    {
-      nim: "2110631170048",
-      nama: "Alvito Kurnia Fahrio",
-      status: "AKTIF",
-    },
-    {
-      nim: "2110631170139",
-      nama: "Rafi Kahfi Yugi",
-      status: "AKTIF",
-    },
-    {
-      nim: "2110631170139",
-      nama: "Rafi Kahfi Yugi",
-      status: "AKTIF",
-    },
-    {
-      nim: "2110631170139",
-      nama: "Rafi Kahfi Yugi",
-      status: "AKTIF",
-    },
-    {
-      nim: "2110631170139",
-      nama: "Rafi Kahfi Yugi",
-      status: "AKTIF",
-    },
-    {
-      nim: "2110631170139",
-      nama: "Rafi Kahfi Yugi",
-      status: "AKTIF",
-    },
-    // Add more Dosen data as needed
-  ]);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-  // eslint-disable-next-line no-unused-vars
-  const navigate = useNavigate();
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/v1/dosen", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-  // const handleTambahDosen = () => {
-  //   navigate("/Dosen/tambah");
-  // };
+        setDosenData(response.data.values);
+        console.log(response.data.values);
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    };
+
+    if (token) {
+      fetchData();
+    }
+  }, []);
 
   const handleDeleteDosen = (index) => {
     // Implement your logic to delete Dosen at the given index
@@ -65,7 +43,9 @@ function Dosen() {
       <div className="flex flex-col h-screen bg-background">
         <div className="flex flex-row justify-between">
           <h1 className="text-3xl font-semibold text-primary">Dosen</h1>
-          <h2 className="text-sky-600 text-xl font-semibold mr-2">Dosen / Tambah</h2>
+          <h2 className="text-sky-600 text-xl font-semibold mr-2">
+            Dosen / Tambah
+          </h2>
         </div>
         <div className="bg-white rounded-md mt-7">
           <div className="p-4 mt-2">
@@ -89,8 +69,8 @@ function Dosen() {
                 {DosenData.map((Dosen, index) => (
                   <tr key={index}>
                     <td className="border p-2 text-center">{index + 1}</td>
-                    <td className="border p-2 ">{Dosen.nim}</td>
-                    <td className="border p-2">{Dosen.nama}</td>
+                    <td className="border p-2 ">{Dosen.nip}</td>
+                    <td className="border p-2">{Dosen.nama_dosen}</td>
                     <td className="border p-2 text-center">{Dosen.status}</td>
                     <td className="border p-2 text-center">
                       <button
