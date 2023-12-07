@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Trash2 } from "lucide-react";
+import { Trash2, Pencil } from "lucide-react";
 import Layout from "../Layout";
 import axios from "axios";
 
@@ -33,6 +33,24 @@ function Mahasiswa() {
       fetchData();
     }
   }, []);
+
+  const handleDeleteMahasiswa = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.delete(`/api/v1/hapusdatamahasiswa/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      
+      // Jika penghapusan berhasil, perbarui state mahasiswaData
+      setMahasiswa((prevData) => prevData.filter(mahasiswa => mahasiswa.id !== id));
+    } catch (error) {
+      console.error("Error deleting data:", error.message);
+    }
+  };
+  
+
 
   return (
     <Layout>
@@ -68,8 +86,15 @@ function Mahasiswa() {
                     <td className="border p-2 text-center">
                       {mahasiswa.status}
                     </td>
-                    <td className="border p-2 text-center">
-                      <button className="color">
+                    <td className="border p-2 text-center flex justify-between">
+                      <button
+                        className="color"
+                      >
+                        <Pencil stroke="#26A1F4" />
+                      </button>
+                      <button
+                        className="color" onClick={() => handleDeleteMahasiswa(mahasiswa.id)}
+                      >
                         <Trash2 stroke="#BF0404" />
                       </button>
                     </td>
