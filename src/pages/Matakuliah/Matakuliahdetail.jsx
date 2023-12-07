@@ -51,7 +51,7 @@ function MatakuliahDetail() {
           <span className="text-primary text-xl font-medium">16 Pertemuan</span>
           <span className="text-primary text-xl font-medium">Ruang 32-1</span>
           <span className="text-primary text-xl font-medium">
-            09.30 - 11.30
+            09.30 - 11.00
           </span>
         </div>
       </div>

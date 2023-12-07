@@ -74,7 +74,7 @@ function MatakuliahTambah() {
           </div>
           <div className="mb-4 flex flex-row justify-between">
             <label className="font-medium text-primary text-1xl flex items-center w-44">
-              Jam Mulai 
+              Jam Mulai
             </label>
             <input
               type="text"

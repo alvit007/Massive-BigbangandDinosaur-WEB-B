@@ -7,7 +7,7 @@ import axios from "axios";
 function Matakuliah() {
   const [matakuliah, setMataKuliah] = useState([]);
 
-  // fetch dataa
+  // fetch data
   useEffect(() => {
     // Mengambil token dari local storage
     const token = localStorage.getItem("token");
