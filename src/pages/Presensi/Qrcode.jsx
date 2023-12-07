@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Expand } from "lucide-react";
 import qr from "../../assets/qr.png";
 import Layout from "../Layout";
+// import ReactDOM from "react-dom";
+import QRCode from "react-qr-code";
 
 function QRcode() {
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ function QRcode() {
           </div>
           <div className="pt-8">
             <div className="w-full h-full bg-background rounded-lg flex justify-center ">
-              <img src={qr} alt="qr" className="p-8" />
+            <QRCode value="https://www.npmjs.com/package/react-qr-code"/>
               <div className="mt-auto mb-4 mr-4">
                 <Expand />
               </div>
