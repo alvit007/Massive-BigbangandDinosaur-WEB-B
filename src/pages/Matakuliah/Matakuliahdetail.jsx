@@ -1,8 +1,30 @@
-import React from "react";
+import React, {useEffect} from "react";
 import matkul1_detail from "../../assets/matkul1_detail.png";
 import Layout from "../Layout";
 
-function MatakuliahDetail() {
+function MatakuliahDetail({ matkulId }) {
+  
+  useEffect(() => {
+     const token = localStorage.getItem("token");
+    const fetchMovieDetails = async () => {
+      try {
+        const response = await fetch(
+          `api/v1/matakuliahbyid/${matkulId}`
+        );
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching movie details:", error);
+      }
+    };
+
+    if (token) {
+      fetchMovieDetails();
+    }
+
+    fetchMovieDetails();
+  }, [matkulId]);
+
   return (
     <Layout>
     <div className="flex flex-col  w-full bg-background">

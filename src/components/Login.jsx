@@ -13,7 +13,7 @@ function Login() {
   const auth = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/v1/loginadmin", {
+      const response = await axios.post("api/v1/loginadmin", {
         email: email,
         password: password,
       });
@@ -21,7 +21,6 @@ function Login() {
       if (response.data.success) {
         // Menyimpan token di local storage
         localStorage.setItem("token", response.data.token);
-        console.log(response.data.token);
         navigate("/dashboard");
       } else {
         setMsg("Username and password are not valid");

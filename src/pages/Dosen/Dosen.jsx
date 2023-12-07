@@ -12,14 +12,13 @@ function Dosen() {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get("/v1/dosen", {
+        const response = await axios.get("api/v1/dosen", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
         setDosenData(response.data.values);
-        console.log(response.data.values);
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
@@ -51,7 +50,7 @@ function Dosen() {
           <div className="p-4 mt-2">
             <Link
               to={"tambah-dosen"}
-              class="bg-primary hover:bg-blue-700 text-white mb font-bold py-2 px-4 rounded"
+              className="bg-primary hover:bg-blue-700 text-white mb font-bold py-2 px-4 rounded"
             >
               Tambah Dosen
             </Link>

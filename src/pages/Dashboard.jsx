@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import datamining from "./../assets/datamining.png";
 import mobileprogramming from "./../assets/mobileprogramming.png";
@@ -13,14 +14,14 @@ function Dashboard() {
     // Melakukan permintaan HTTP dengan token
     const fetchData = async () => {
       try {
-        const response = await axios.get("/v1/admin", {
+        const response = await axios.get("/api/v1/admin", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
         // Menggunakan data dari server
-        console.log(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }

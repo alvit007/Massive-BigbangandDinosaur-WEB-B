@@ -15,7 +15,7 @@ function Matakuliah() {
     // Melakukan permintaan HTTP dengan token
     const fetchData = async () => {
       try {
-        const response = await axios.get("/v1/matakuliah", {
+        const response = await axios.get("/api/v1/matakuliah", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

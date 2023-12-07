@@ -1,43 +1,79 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Layout from "../Layout";
+import axios from "axios";
 
 function Presensi() {
+  const [pres, setPresensi] = useState([]);
+
+  // fetch data
+  useEffect(() => {
+    // Mengambil token dari local storage
+    const token = localStorage.getItem("token");
+    // Melakukan permintaan HTTP dengan token
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/api/v1/jadwal", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        // Menggunakan data dari server
+        // setPresensi(response.data.values);
+        setPresensi(response.data.values);
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    };
+
+    if (token) {
+      fetchData();
+    }
+  }, []);
+  // end fetch
+
   return (
     <>
       <Layout>
-      <div className="flex flex-col h-screen bg-background">
-        <div className="flex flex-row justify-between mb-[26px]">
-          <h1 className="text-3xl font-semibold text-primary">Presensi</h1>
-          <h2 className="text-sky-600 text-xl font-semibold mr-2 self-center">
-            Presensi
-          </h2>
-        </div>
-
-        <div className="p-5 rounded-r-sm bg-white h-[250px]">
-          <p className="text-blue-400">S1 Teknik Informatika</p>
-          <h4>Frontend Programming</h4>
-          <hr className="bg-dark-500" />
-          <p className="mt-2">Hari : Senin</p>
-          <p>Waktu : 07.00 - 09.00</p>
-          <p>Ruangan 22-5</p>
-          <p>SKS:3</p>
-          <div className="flex mt-2">
-            <Link
-              to="/presensi/mulai-presensi"
-              className="bg-merah text-white rounded-lg p-3 text-center  w-[170px] hover:bg-[#071B4E] text-md"
-            >
-              Mulai Presensi
-            </Link>
-            <Link
-              to="/presensi/rekap-presensi"
-              className="bg-primary text-white text-center p-3 rounded-lg w-[170px] hover:bg-[#920202] text-md ml-5"
-            >
-              Rekap Presensi
-            </Link>
+        <div className="flex flex-col  bg-background">
+          <div className="flex flex-row justify-between mb-[26px]">
+            <h1 className="text-3xl font-semibold text-primary">Presensi</h1>
+            <h2 className="text-sky-600 text-xl font-semibold mr-2 self-center">
+              Presensi
+            </h2>
           </div>
+          {pres.map((item, index) => (
+            <div
+              key={index}
+              className="p-5 rounded-r-sm mb-5 bg-white h-[250px]"
+            >
+              <p className="text-blue-400">S1 Teknik Informatika</p>
+              <h4>{item.nama_matakuliah}</h4>
+              <hr className="bg-dark-500" />
+              <p className="mt-2">Hari : {item.hari}</p>
+              <p>
+                Waktu : {item.jam_mulai} - {item.jam_selesai}
+              </p>
+              <p>Ruangan {item.ruangan}</p>
+              <p>SKS:{item.sks}</p>
+              <div className="flex mt-2">
+                <Link
+                  to={`/presensi/mulai-presensi/${item.id_jadwal}`}
+                  className="bg-merah text-white rounded-lg p-3 text-center  w-[170px] hover:bg-[#071B4E] text-md"
+                >
+                  Mulai Presensi
+                </Link>
+                <Link
+                  to="/presensi/rekap-presensi"
+                  className="bg-primary text-white text-center p-3 rounded-lg w-[170px] hover:bg-[#920202] text-md ml-5"
+                >
+                  Rekap Presensi
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
       </Layout>
     </>
   );

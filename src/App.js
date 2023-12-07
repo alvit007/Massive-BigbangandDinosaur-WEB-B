@@ -43,7 +43,7 @@ function App() {
           <Route path="/dosen" element={<Dosen />} />
           <Route path='/dosen/tambah-dosen' element={<DosenTambah />}></Route>
           <Route path='/presensi' element={<Presensi />} />
-          <Route path='/presensi/mulai-presensi' element={<MulaiPresensi/>}></Route>
+          <Route path='/presensi/mulai-presensi/:id_jadwal' element={<MulaiPresensi/>}></Route>
           <Route path='/presensi/rekap-presensi' element={<RekapPresensi/>}></Route>
           <Route path='/presensi/mulai-presensi/presensi-manual' element={<PresensiManual/>}></Route>
           <Route path='/presensi/mulai-presensi/generate-qrcode' element={<QRcode/>}></Route>

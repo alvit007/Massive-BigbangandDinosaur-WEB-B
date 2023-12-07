@@ -1,11 +1,46 @@
-import React from "react";
-import { Link } from "react-router-dom";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import Layout from "../Layout";
+import axios from "axios";
+
 function MulaiPresensi() {
+  const [press, setPresensi] = useState([]);
+  const { id_jadwal } = useParams();
+
+  const sessionsData = Array.from({ length: 16 }, (_, index) => ({
+    pertemuan: `Pertemuan ${index + 1}`,
+    hari: `${press.hari}`,
+    ruangan: `${press.ruangan}`,
+    jam_mulai: `${press.jam_mulai}`,
+    jam_selesai: `${press.jam_selesai}`,
+  }));
+
+  useEffect(() => {
+    if (id_jadwal) {
+      getJadwalPresensiById();
+    }
+  }, [id_jadwal]);
+
+  async function getJadwalPresensiById() {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.get(`/api/v1/jadwalbyid/${id_jadwal}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setPresensi(response.data.values[0]);
+      console.log(response.data.values[0]);
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+    }
+  }
+
   return (
     <>
       <Layout>
-        <div className="flex flex-col h-screen bg-background">
+        <div className="flex flex-col  bg-background">
           <div className="flex flex-row justify-between">
             <h1 className="text-3xl font-semibold text-primary">
               Rekap Presensi
@@ -20,12 +55,13 @@ function MulaiPresensi() {
               </span>{" "}
             </h2>
           </div>
-
           <div className="bg-white rounded-md mt-7">
             <div className="p-8">
               <div>
                 <h2 className="text-sky-600 text-2xl">S1 Teknik Informatika</h2>
-                <h1 className="text-2xl pt-5">Frontend Programming </h1>
+                <h1 className="text-2xl pt-5">
+                  {press.nama_matakuliah}_{press.kode_matakuliah}
+                </h1>
                 <div className="border-b dark:border-neutral-300 mt-2"></div>
               </div>
 
@@ -46,7 +82,7 @@ function MulaiPresensi() {
                               scope="col"
                               className="border-r px-6 py-4 dark:border-neutral-500"
                             >
-                              Tanggal
+                              Hari
                             </th>
                             <th
                               scope="col"
@@ -66,78 +102,41 @@ function MulaiPresensi() {
                           </tr>
                         </thead>
                         <tbody>
-                          <tr className="border-b dark:border-neutral-500">
-                            <td className="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
-                              Pertemuan 1
-                            </td>
-                            <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                              13-11-23
-                            </td>
-                            <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                              Ruang 32-1
-                            </td>
-                            <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                              09.30 - 11.00
-                            </td>
-                            <td className="whitespace-nowrap px-6 py-4">
-                              <Link
-                                to="/presensi/mulai-presensi/generate-qrcode"
-                                className="bg-merah text-white rounded-lg py-2 px-4 hover:bg-[#071B4E] text-md"
-                              >
-                                Mulai Presensi
-                              </Link>
-                              <Link
-                                to={"/presensi/mulai-presensi/presensi-manual"}
-                                className="bg-primary text-white rounded-lg ml-2 py-2 px-4 hover:bg-[#920202] text-md"
-                              >
-                                Presensi Manual
-                              </Link>
-                            </td>
-                          </tr>
-                          <tr className="border-b dark:border-neutral-500">
-                            <td className="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
-                              Pertemuan 2
-                            </td>
-                            <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                              13-11-23
-                            </td>
-                            <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                              Ruang 32-1
-                            </td>
-                            <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                              09.30 - 11.00
-                            </td>
-                            <td className="whitespace-nowrap px-6 py-4">
-                              <button className="bg-merah text-white rounded-lg py-2 px-4 hover:bg-[#071B4E] text-md">
-                                Mulai Presensi
-                              </button>
-                              <button className="bg-primary text-white rounded-lg ml-2 py-2 px-4 hover:bg-[#920202] text-md">
-                                Presensi Manual
-                              </button>
-                            </td>
-                          </tr>
-                          <tr className="border-b dark:border-neutral-500">
-                            <td className="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
-                              Pertemuan 3
-                            </td>
-                            <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                              13-11-23
-                            </td>
-                            <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                              Ruang 32-1
-                            </td>
-                            <td className="whitespace-nowrap border-r  dark:border-neutral-500 px-6 py-4">
-                              09.30 - 11.00
-                            </td>
-                            <td className="whitespace-nowrap border-r  dark:border-neutral-500 px-6 py-4">
-                              <button className="bg-merah text-white rounded-lg py-2 px-4 hover:bg-[#071B4E] text-md">
-                                Mulai Presensi
-                              </button>
-                              <button className="bg-primary text-white rounded-lg ml-2 py-2 px-4 hover:bg-[#920202] text-md">
-                                Presensi Manual
-                              </button>
-                            </td>
-                          </tr>
+                          {sessionsData.map((session, index) => (
+                            <tr
+                              key={index}
+                              className="border-b dark:border-neutral-500"
+                            >
+                              <td className="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
+                                {session.pertemuan}
+                              </td>
+                              <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                {session.hari}
+                              </td>
+                              <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                {session.ruangan}
+                              </td>
+                              <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                {session.jam_mulai} - {session.jam_selesai}
+                              </td>
+                              <td className="whitespace-nowrap px-6 py-4">
+                                <Link
+                                  to="/presensi/mulai-presensi/generate-qrcode"
+                                  className="bg-merah text-white rounded-lg py-2 px-4 hover:bg-[#071B4E] text-md"
+                                >
+                                  Mulai Presensi
+                                </Link>
+                                <Link
+                                  to={
+                                    "/presensi/mulai-presensi/presensi-manual"
+                                  }
+                                  className="bg-primary text-white rounded-lg ml-2 py-2 px-4 hover:bg-[#920202] text-md"
+                                >
+                                  Presensi Manual
+                                </Link>
+                              </td>
+                            </tr>
+                          ))}
                         </tbody>
                       </table>
                     </div>

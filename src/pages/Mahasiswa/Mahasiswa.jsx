@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Trash2 } from "lucide-react";
 import Layout from "../Layout";
-import axios from "axios"
+import axios from "axios";
 
 function Mahasiswa() {
-  const [mahasiswaData, setMahasiswa] = useState([])
-
+  const [mahasiswaData, setMahasiswa] = useState([]);
 
   useEffect(() => {
     // Mengambil token dari local storage
@@ -15,12 +14,14 @@ function Mahasiswa() {
     // Melakukan permintaan HTTP dengan token
     const fetchData = async () => {
       try {
-        const response = await axios.get("/v1/mahasiswa", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
+        const response = await axios.get(
+          "api/v1/mahasiswa",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         // Menggunakan data dari server
         setMahasiswa(response.data.values);
       } catch (error) {
@@ -32,10 +33,6 @@ function Mahasiswa() {
       fetchData();
     }
   }, []);
-
-
-  
-
 
   return (
     <Layout>
@@ -72,9 +69,7 @@ function Mahasiswa() {
                       {mahasiswa.status}
                     </td>
                     <td className="border p-2 text-center">
-                      <button
-                        className="color"
-                      >
+                      <button className="color">
                         <Trash2 stroke="#BF0404" />
                       </button>
                     </td>
