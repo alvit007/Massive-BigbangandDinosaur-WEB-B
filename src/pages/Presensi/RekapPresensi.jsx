@@ -85,7 +85,7 @@ function RekapPresensi() {
                 <tbody>
                   <tr>
                     <td className="border p-2">{item.nama_mahasiswa}</td>
-                    <td className="border p-2">{item.nip}</td>
+                    <td className="border p-2">{item.npm}</td>
                     <td className="border p-2 text-center">S</td>
                     <td className="border p-2 text-center">H</td>
                     <td className="border p-2 text-center">A</td>

@@ -36,7 +36,7 @@ function Dashboard() {
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === matakuliah.length - 1 ? 0 : prevIndex + 1
+      prevIndex === matakuliah.length - 3 ? 0 : prevIndex + 1
     );
   };
 

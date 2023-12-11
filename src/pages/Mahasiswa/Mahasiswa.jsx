@@ -44,7 +44,9 @@ function Mahasiswa() {
       });
       
       // Jika penghapusan berhasil, perbarui state mahasiswaData
-      setMahasiswa((prevData) => prevData.filter(mahasiswa => mahasiswa.id !== id));
+      // setMahasiswa((prevData) => prevData.filter(mahasiswa => mahasiswa.id !== id));
+      console.log(response.data)
+      console.log(id)
     } catch (error) {
       console.error("Error deleting data:", error.message);
     }
@@ -87,11 +89,10 @@ function Mahasiswa() {
                       {mahasiswa.status}
                     </td>
                     <td className="border p-2 text-center flex justify-between">
-                      <button
-                        className="color"
+                      <Link to={`ubah-mahasiswa/${mahasiswa.id_mahasiswa}`}
                       >
                         <Pencil stroke="#26A1F4" />
-                      </button>
+                      </Link>
                       <button
                         className="color" onClick={() => handleDeleteMahasiswa(mahasiswa.id)}
                       >
