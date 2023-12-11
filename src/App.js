@@ -25,6 +25,7 @@ import EditProfile from './pages/Pofile/EditProfile.jsx';
 import GantiPassword from './pages/Pofile/GantiPassword.jsx';
 import Help from './pages/Help/Help.jsx';
 import QRCodeScanner from './components/QRCodeScanner.js';
+import MahasiswaUbah from './pages/Mahasiswa/MahasiswaUbah.jsx';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/matakuliah/detail" element={<MatakuliahDetail/>} />
           <Route path="/mahasiswa" element={<Mahasiswa />} />
           <Route path='/mahasiswa/tambah-mahasiswa' element={<MahasiswaTambah/>}></Route>
+          <Route path='/mahasiswa/ubah-mahasiswa' element={<MahasiswaUbah/>}></Route>
           <Route path="/dosen" element={<Dosen />} />
           <Route path='/dosen/tambah-dosen' element={<DosenTambah />}></Route>
           <Route path='/presensi' element={<Presensi />} />
