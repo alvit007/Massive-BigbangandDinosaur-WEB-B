@@ -50,7 +50,7 @@ function Dosen() {
           <div className="p-4 mt-2">
             <Link
               to={"tambah-dosen"}
-              className="bg-primary hover:bg-blue-700 text-white mb font-bold py-2 px-4 rounded"
+              className="bg-primary hover:bg-[#071B4E] text-white mb font-bold py-2 px-4 rounded"
             >
               Tambah Dosen
             </Link>

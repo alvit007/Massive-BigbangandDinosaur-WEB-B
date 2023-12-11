@@ -148,7 +148,7 @@ function MulaiPresensi() {
                               <td className="whitespace-nowrap px-6 py-4">
                                 <button
                                   onClick={() => handleMulaiPresensi(session)}
-                                  className="bg-merah text-white rounded-lg py-2 px-4 hover:bg-[#071B4E] text-md"
+                                  className="bg-merah text-white rounded-lg py-2 px-4  hover:bg-[#920202] text-md"
                                 >
                                   Mulai Presensi
                                 </button>
@@ -156,7 +156,7 @@ function MulaiPresensi() {
                                   to={
                                     "/presensi/mulai-presensi/presensi-manual"
                                   }
-                                  className="bg-primary text-white rounded-lg ml-2 py-2 px-4 hover:bg-[#920202] text-md"
+                                  className="bg-primary text-white rounded-lg ml-2 py-2 px-4  hover:bg-[#071B4E] text-md"
                                 >
                                   Presensi Manual
                                 </Link>

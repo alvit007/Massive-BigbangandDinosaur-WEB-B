@@ -45,6 +45,7 @@ function Dashboard() {
       prevIndex === 0 ? matakuliah.length - 1 : prevIndex - 1
     );
   };
+  
 
   return (
     <>
