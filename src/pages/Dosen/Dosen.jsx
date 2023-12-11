@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Trash2 } from "lucide-react";
+import { Trash2, Pencil } from "lucide-react";
 import Layout from "../Layout";
 import axios from "axios";
 
@@ -71,7 +71,13 @@ function Dosen() {
                     <td className="border p-2 ">{Dosen.nip}</td>
                     <td className="border p-2">{Dosen.nama_dosen}</td>
                     <td className="border p-2 text-center">{Dosen.status}</td>
-                    <td className="border p-2 text-center">
+                    <td className="border p-2 text-center flex justify-between">
+                      <Link to={`ubah-dosen/${Dosen.id_dosen}`}
+                        className="color"
+                      >
+                        <Pencil stroke="#26A1F4" />
+                      </Link>
+
                       <button
                         className="color"
                         onClick={() => handleDeleteDosen(index)}
