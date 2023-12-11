@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
+import { useNavigate } from "react-router-dom";
 import Bg from "./../assets/bg.png";
 import LogoIMG from "./../assets/Logo.png";
 import axios from "axios";
@@ -8,19 +8,22 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
-  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+  const [userType, setUserType] = useState("admin"); // Default to admin
+  const navigate = useNavigate();
 
   const auth = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("api/v1/loginadmin", {
-        email: email,
+      const response = await axios.post(`/api/v1/login${userType}`, {
+        [userType === "admin" ? "email" : "nip"]: email, 
         password: password,
       });
 
       if (response.data.success) {
-        // Menyimpan token di local storage
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", response.data.user);
+        localStorage.setItem("role", response.data.role);
+
         navigate("/dashboard");
       } else {
         setMsg("Username and password are not valid");
@@ -69,6 +72,27 @@ function Login() {
                   className="border-2 border-grey w-[300px] h-[40px] rounded-md px-2 py-1 mt-3"
                 />
                 {msg && <p className="text-red-500 mr-[28px] text-sm">{msg}</p>}
+
+                <div className="radio-group flex  mt-3">
+                  <label className="radio-label">
+                    <input
+                      type="radio"
+                      value="admin"
+                      checked={userType === "admin"}
+                      onChange={() => setUserType("admin")}
+                    />
+                    Admin
+                  </label>
+                  <label className="radio-label ml-2">
+                    <input
+                      type="radio"
+                      value="dosen"
+                      checked={userType === "dosen"}
+                      onChange={() => setUserType("dosen")}
+                    />
+                    Dosen
+                  </label>
+                </div>
               </div>
               <div className="button flex justify-center items-center">
                 <button className="bg-primary text-white w-[300px] h-[40px] rounded-md px-2 py-1 mt-4 text-center">

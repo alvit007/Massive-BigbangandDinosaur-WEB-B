@@ -4,7 +4,7 @@ import './index.css';
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route, Navigate
 } from 'react-router-dom';
 import Dashboard from "./pages/Dashboard.jsx"
 import Matakuliah from "./pages/Matakuliah/Matakuliah.jsx"
@@ -24,6 +24,7 @@ import Profile from './pages/Pofile/Profile.jsx';
 import EditProfile from './pages/Pofile/EditProfile.jsx';
 import GantiPassword from './pages/Pofile/GantiPassword.jsx';
 import Help from './pages/Help/Help.jsx';
+import QRCodeScanner from './components/QRCodeScanner.js';
 
 function App() {
   return (
@@ -44,10 +45,15 @@ function App() {
           <Route path='/dosen/tambah-dosen' element={<DosenTambah />}></Route>
           <Route path='/presensi' element={<Presensi />} />
           <Route path='/presensi/mulai-presensi/:id_jadwal' element={<MulaiPresensi/>}></Route>
-          <Route path='/presensi/rekap-presensi' element={<RekapPresensi/>}></Route>
+          <Route path='/presensi/rekap-presensi/:id_jadwal' element={<RekapPresensi/>}></Route>
           <Route path='/presensi/mulai-presensi/presensi-manual' element={<PresensiManual/>}></Route>
-          <Route path='/presensi/mulai-presensi/generate-qrcode' element={<QRcode/>}></Route>
+          <Route path='/presensi/mulai-presensi/generate-qrcode/:id_jadwal/:pertemuan' element={<QRcode/>}></Route>
           <Route path='/help' element={<Help />}></Route>
+          <Route path='/qrscan' element={<QRCodeScanner />}></Route>
+          <Route
+            path="/logout"
+            element={<Navigate to="/" replace />}
+          />
         </Routes>
     </Router>
     </>

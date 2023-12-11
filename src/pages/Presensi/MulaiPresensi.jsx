@@ -1,19 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Layout from "../Layout";
 import axios from "axios";
 
 function MulaiPresensi() {
   const [press, setPresensi] = useState([]);
   const { id_jadwal } = useParams();
+  const navigate = useNavigate();
 
   const sessionsData = Array.from({ length: 16 }, (_, index) => ({
-    pertemuan: `Pertemuan ${index + 1}`,
+    pertemuan: `Pertemuan${index + 1}`,
     hari: `${press.hari}`,
     ruangan: `${press.ruangan}`,
     jam_mulai: `${press.jam_mulai}`,
     jam_selesai: `${press.jam_selesai}`,
+    matakuliah: press.nama_matakuliah,
+    npm: press.npm,
+    kode_matakuliah: press.kode_matakuliah,
+    lokasi: press.lokasi,
   }));
 
   useEffect(() => {
@@ -36,6 +41,27 @@ function MulaiPresensi() {
       console.error("Error fetching data:", error.message);
     }
   }
+
+  
+
+  const handleMulaiPresensi = (session) => {
+    // Redirect to the QR code component with session data
+    navigate(
+      `/presensi/mulai-presensi/generate-qrcode/${id_jadwal}/${session.pertemuan}`,
+      {
+        state: {
+          pertemuan: session.pertemuan,
+          matakuliah: session.matakuliah,
+          kode_matakuliah: session.kode_matakuliah,
+          hari: session.hari,
+          ruangan: session.ruangan,
+          jam_mulai: session.jam_mulai,
+          jam_selesai: session.jam_selesai,
+          lokasi: session.gedung,
+        },
+      }
+    );
+  };
 
   return (
     <>
@@ -120,12 +146,12 @@ function MulaiPresensi() {
                                 {session.jam_mulai} - {session.jam_selesai}
                               </td>
                               <td className="whitespace-nowrap px-6 py-4">
-                                <Link
-                                  to="/presensi/mulai-presensi/generate-qrcode"
+                                <button
+                                  onClick={() => handleMulaiPresensi(session)}
                                   className="bg-merah text-white rounded-lg py-2 px-4 hover:bg-[#071B4E] text-md"
                                 >
                                   Mulai Presensi
-                                </Link>
+                                </button>
                                 <Link
                                   to={
                                     "/presensi/mulai-presensi/presensi-manual"

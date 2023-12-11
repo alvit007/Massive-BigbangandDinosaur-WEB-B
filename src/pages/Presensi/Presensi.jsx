@@ -18,9 +18,6 @@ function Presensi() {
             Authorization: `Bearer ${token}`,
           },
         });
-
-        // Menggunakan data dari server
-        // setPresensi(response.data.values);
         setPresensi(response.data.values);
       } catch (error) {
         console.error("Error fetching data:", error.message);
@@ -32,6 +29,7 @@ function Presensi() {
     }
   }, []);
   // end fetch
+  
 
   return (
     <>
@@ -49,7 +47,7 @@ function Presensi() {
               className="p-5 rounded-r-sm mb-5 bg-white h-[250px]"
             >
               <p className="text-blue-400">S1 Teknik Informatika</p>
-              <h4>{item.nama_matakuliah}</h4>
+              <h4>{item.nama_matakuliah}_{item.kode_matakuliah}</h4>
               <hr className="bg-dark-500" />
               <p className="mt-2">Hari : {item.hari}</p>
               <p>
@@ -65,7 +63,7 @@ function Presensi() {
                   Mulai Presensi
                 </Link>
                 <Link
-                  to="/presensi/rekap-presensi"
+                  to={`/presensi/rekap-presensi/${item.id_jadwal}`}
                   className="bg-primary text-white text-center p-3 rounded-lg w-[170px] hover:bg-[#920202] text-md ml-5"
                 >
                   Rekap Presensi
