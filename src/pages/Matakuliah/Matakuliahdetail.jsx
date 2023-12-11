@@ -3,6 +3,8 @@ import matkul1_detail from "../../assets/matkul1_detail.png";
 import Layout from "../Layout";
 
 function MatakuliahDetail({ matkulId }) {
+
+  
   
   useEffect(() => {
      const token = localStorage.getItem("token");
@@ -17,6 +19,7 @@ function MatakuliahDetail({ matkulId }) {
         console.error("Error fetching movie details:", error);
       }
     };
+
 
     if (token) {
       fetchMovieDetails();
@@ -48,9 +51,9 @@ function MatakuliahDetail({ matkulId }) {
           </div>
           <div className="flex flex-col justify-between w-[400px] h-[190px] ml-5">
             <span className="text-primary text-4xl font-semibold">
-              SISTEM DIGITAL
+              MATEMATIKA DASAR
             </span>
-            <span className="text-primary text-2xl font-semibold">FKAZA</span>
+            <span className="text-primary text-2xl font-semibold">MK001</span>
             <span className="text-primary text-2xl font-semibold">2023</span>
             <div className="bg-background w-full h-2 rounded-full overflow-hidden">
               <div className="bg-primary h-2 w-28"></div>
@@ -71,7 +74,7 @@ function MatakuliahDetail({ matkulId }) {
           </span>
           <span className="text-primary text-xl font-medium">37 Mahasiswa</span>
           <span className="text-primary text-xl font-medium">16 Pertemuan</span>
-          <span className="text-primary text-xl font-medium">Ruang 32-1</span>
+          <span className="text-primary text-xl font-medium">Ruang LT1-2A</span>
           <span className="text-primary text-xl font-medium">
             09.30 - 11.00
           </span>
