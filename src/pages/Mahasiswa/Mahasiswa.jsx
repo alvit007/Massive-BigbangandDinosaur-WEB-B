@@ -10,7 +10,7 @@ function Mahasiswa() {
   useEffect(() => {
     // Mengambil token dari local storage
     const token = localStorage.getItem("token");
-
+    
     // Melakukan permintaan HTTP dengan token
     const fetchData = async () => {
       try {
@@ -87,11 +87,11 @@ function Mahasiswa() {
                       {mahasiswa.status}
                     </td>
                     <td className="border p-2 text-center flex justify-between">
-                      <button
+                      <Link to={`ubah-mahasiswa/${mahasiswa.id_mahasiswa}`}
                         className="color"
                       >
                         <Pencil stroke="#26A1F4" />
-                      </button>
+                      </Link>
                       <button
                         className="color" onClick={() => handleDeleteMahasiswa(mahasiswa.id)}
                       >

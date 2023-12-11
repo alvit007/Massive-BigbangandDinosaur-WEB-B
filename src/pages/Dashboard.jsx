@@ -74,13 +74,13 @@ function Dashboard() {
                 </div>
               ))}
             <button
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-primary text-white  p-2 rounded-full"
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-primary text-white  px-2 rounded-full"
               onClick={handlePrev}
             >
               {"<"}
             </button>
             <button
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-primary text-white p-2 rounded-full"
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-primary text-white px-2 rounded-full"
               onClick={handleNext}
             >
               {">"}

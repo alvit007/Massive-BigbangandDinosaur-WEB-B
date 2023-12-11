@@ -18,12 +18,11 @@ function Login() {
         [userType === "admin" ? "email" : "nip"]: email, 
         password: password,
       });
-
+      
       if (response.data.success) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", response.data.user);
         localStorage.setItem("role", response.data.role);
-
         navigate("/dashboard");
       } else {
         setMsg("Username and password are not valid");
@@ -34,7 +33,6 @@ function Login() {
       }
     }
   };
-
   return (
     <section
       className="bg-merah h-screen flex items-center justify-center"
