@@ -36,7 +36,7 @@ function Dashboard() {
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === matakuliah.length - 1 ? 0 : prevIndex + 1
+      prevIndex === matakuliah.length - 3 ? 0 : prevIndex + 1
     );
   };
 
@@ -45,6 +45,7 @@ function Dashboard() {
       prevIndex === 0 ? matakuliah.length - 1 : prevIndex - 1
     );
   };
+  
 
   return (
     <>
@@ -74,13 +75,13 @@ function Dashboard() {
                 </div>
               ))}
             <button
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-primary text-white  p-2 rounded-full"
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-primary text-white text-1xl px-2 rounded-full"
               onClick={handlePrev}
             >
               {"<"}
             </button>
             <button
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-primary text-white p-2 rounded-full"
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-primary text-white text-1xl px-2 rounded-full"
               onClick={handleNext}
             >
               {">"}
@@ -163,16 +164,16 @@ function Dashboard() {
                   </button>
                 </div>
                 <div className=" flex flex-col w-[20px] h-[200px] justify-around ml-[80px] -mt-[8px]">
-                  <span className="text-primary font-medium text-3xl">
+                  <span className="text-primary font-medium text-3xl cursor-pointer">
                     <span href="#">...</span>
                   </span>
-                  <span className="text-primary font-medium text-3xl">
+                  <span className="text-primary font-medium text-3xl cursor-pointer">
                     <span href="#">...</span>
                   </span>
-                  <span className="text-primary font-medium text-3xl">
+                  <span className="text-primary font-medium text-3xl cursor-pointer">
                     <span href="#">...</span>
                   </span>
-                  <span className="text-primary font-medium text-3xl">
+                  <span className="text-primary font-medium text-3xl cursor-pointer">
                     <span href="#">...</span>
                   </span>
                 </div>
