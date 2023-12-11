@@ -36,13 +36,13 @@ function Dashboard() {
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === matakuliah.length - 3 ? 0 : prevIndex + 1
+      prevIndex ===  matakuliah.length - 3  ? 0 : prevIndex + 1
     );
   };
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? matakuliah.length - 1 : prevIndex - 1
+      prevIndex ===  matakuliah.length - 3 ? 0 : prevIndex + 1
     );
   };
   
@@ -54,7 +54,7 @@ function Dashboard() {
           <h2 className="text-3xl font-semibold text-primary mb-[25px]">
             Dashboard
           </h2>
-          <div className="container bg-white w-[976px] h-[226px] rounded-lg flex justify-evenly relative">
+          <div className="container bg-white w-[976px] h-[226px] rounded-lg flex justify-evenly relative ">
             {matakuliah
               .slice(currentIndex, currentIndex + 3)
               .map((item, index) => (
