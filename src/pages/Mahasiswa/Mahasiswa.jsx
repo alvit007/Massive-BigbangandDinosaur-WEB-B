@@ -44,7 +44,9 @@ function Mahasiswa() {
       });
       
       // Jika penghapusan berhasil, perbarui state mahasiswaData
-      setMahasiswa((prevData) => prevData.filter(mahasiswa => mahasiswa.id !== id));
+      // setMahasiswa((prevData) => prevData.filter(mahasiswa => mahasiswa.id !== id));
+      console.log(response.data)
+      console.log(id)
     } catch (error) {
       console.error("Error deleting data:", error.message);
     }
@@ -63,7 +65,7 @@ function Mahasiswa() {
           <div className="p-4 mt-2">
             <Link
               to={"tambah-mahasiswa"}
-              className="bg-primary hover:bg-blue-700 text-white mb font-bold py-2 px-4 rounded"
+              className="bg-primary hover:bg-[#071B4E] text-white mb font-bold py-2 px-4 rounded"
             >
               Tambah Mahasiswa
             </Link>
@@ -93,7 +95,7 @@ function Mahasiswa() {
                         <Pencil stroke="#26A1F4" />
                       </Link>
                       <button
-                        className="color" onClick={() => handleDeleteMahasiswa(mahasiswa.id)}
+                        onClick={() => handleDeleteMahasiswa(mahasiswa.id)}
                       >
                         <Trash2 stroke="#BF0404" />
                       </button>

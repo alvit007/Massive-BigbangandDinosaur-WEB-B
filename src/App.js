@@ -24,7 +24,6 @@ import Profile from './pages/Pofile/Profile.jsx';
 import EditProfile from './pages/Pofile/EditProfile.jsx';
 import GantiPassword from './pages/Pofile/GantiPassword.jsx';
 import Help from './pages/Help/Help.jsx';
-import QRCodeScanner from './components/QRCodeScanner.js';
 import MahasiswaUbah from './pages/Mahasiswa/MahasiswaUbah.jsx';
 
 function App() {
@@ -51,7 +50,6 @@ function App() {
           <Route path='/presensi/mulai-presensi/presensi-manual' element={<PresensiManual/>}></Route>
           <Route path='/presensi/mulai-presensi/generate-qrcode/:id_jadwal/:pertemuan' element={<QRcode/>}></Route>
           <Route path='/help' element={<Help />}></Route>
-          <Route path='/qrscan' element={<QRCodeScanner />}></Route>
           <Route
             path="/logout"
             element={<Navigate to="/" replace />}
