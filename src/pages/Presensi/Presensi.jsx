@@ -58,13 +58,13 @@ function Presensi() {
               <div className="flex mt-2">
                 <Link
                   to={`/presensi/mulai-presensi/${item.id_jadwal}`}
-                  className="bg-merah text-white rounded-lg p-3 text-center  w-[170px] hover:bg-[#071B4E] text-md"
+                  className="bg-merah text-white rounded-lg p-3 text-center  w-[170px] hover:bg-[#920202] text-md"
                 >
                   Mulai Presensi
                 </Link>
                 <Link
                   to={`/presensi/rekap-presensi/${item.id_jadwal}`}
-                  className="bg-primary text-white text-center p-3 rounded-lg w-[170px] hover:bg-[#920202] text-md ml-5"
+                  className="bg-primary text-white text-center p-3 rounded-lg w-[170px]  hover:bg-[#071B4E] text-md ml-5"
                 >
                   Rekap Presensi
                 </Link>
