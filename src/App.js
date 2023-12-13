@@ -25,6 +25,7 @@ import EditProfile from './pages/Pofile/EditProfile.jsx';
 import GantiPassword from './pages/Pofile/GantiPassword.jsx';
 import Help from './pages/Help/Help.jsx';
 import MahasiswaUbah from './pages/Mahasiswa/MahasiswaUbah.jsx';
+import DosenUbah from './pages/Dosen/DosenUbah.jsx';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path='/mahasiswa/ubah-mahasiswa/:id_mahasiswa' element={<MahasiswaUbah/>}></Route>
           <Route path="/dosen" element={<Dosen />} />
           <Route path='/dosen/tambah-dosen' element={<DosenTambah />}></Route>
+          <Route path='/dosen/ubah-dosen/:id_dosen' element={<DosenUbah />}></Route>
           <Route path='/presensi' element={<Presensi />} />
           <Route path='/presensi/mulai-presensi/:id_jadwal' element={<MulaiPresensi/>}></Route>
           <Route path='/presensi/rekap-presensi/:id_jadwal' element={<RekapPresensi/>}></Route>
