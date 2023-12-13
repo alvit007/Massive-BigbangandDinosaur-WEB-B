@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { MapPin } from "lucide-react";
 import Layout from "../Layout";
 import axios from "axios";
@@ -66,11 +66,11 @@ function Matakuliah() {
           <div className="flex flex-col gap-12">
             {/* Matkul Pendek */}
             {matakuliah.map((matakuliah, index) => (
-              <div
-                key={index}
-                className="bg-white w-[600px] h-[228px] pl-[50px] mb-3 rounded-lg grid grid-cols-3 justify-items-center hover:brightness-75 hover:transition-all cursor-pointer"
-                onClick={handleDetailMatakuliah}
-              >
+              <Link 
+              key={index} to={`detail/${matakuliah.id_matakuliah}`}
+              className="bg-white w-[600px] h-[228px] pl-[50px] mb-3 rounded-lg grid grid-cols-3 justify-items-center hover:brightness-75 hover:transition-all cursor-pointer"
+              onClick={handleDetailMatakuliah}>
+                
                 <div className="w-[255px] h-[178px] overflow-hidden rounded-lg self-center">
                   <img src={gambarMatakuliah} alt={gambarMatakuliah} />
                 </div>
@@ -97,7 +97,7 @@ function Matakuliah() {
                     <a href="detail">...</a>
                   </span>
                 </div> */}
-              </div>
+              </Link>
             ))}
           </div>
 

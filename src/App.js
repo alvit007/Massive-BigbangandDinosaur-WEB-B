@@ -38,7 +38,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/matakuliah" element={<Matakuliah />} />
           <Route path="/matakuliah/tambah" element={<MatakuliahTambah />} />
-          <Route path="/matakuliah/detail" element={<MatakuliahDetail/>} />
+          <Route path="/matakuliah/detail/:id_matakuliah" element={<MatakuliahDetail/>} />
           <Route path="/mahasiswa" element={<Mahasiswa />} />
           <Route path='/mahasiswa/tambah-mahasiswa' element={<MahasiswaTambah/>}></Route>
           <Route path='/mahasiswa/ubah-mahasiswa/:id_mahasiswa' element={<MahasiswaUbah/>}></Route>
