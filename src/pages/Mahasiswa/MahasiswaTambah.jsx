@@ -1,7 +1,94 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Layout from "../Layout";
 
 function MahasiswaTambah() {
+  const [token, setToken] = useState("");
+  const [formData, setFormData] = useState({
+    nama_mahasiswa: "",
+    npm: "",
+    jk: "",
+    alamat: "",
+    foto: null,
+    status: "",
+    notlp: "",
+    email: "",
+    password: "",
+    id_kelas: "",
+    nama_kelas: "",
+  });
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const tokenResponse = await axios.post("/api/v1/tambahmahasiswa", {});
+        setToken(tokenResponse.data.token);
+      } catch (error) {
+        console.error("Gagal mengambil token:", error);
+      }
+    };
+
+    fetchToken();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("/api/v1/tambahmahasiswa", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // Lakukan sesuatu dengan data yang diterima
+      console.log(response.data);
+    } catch (error) {
+      console.error("Gagal mengambil data:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (token) {
+      fetchData();
+    }
+  }, [token]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setFormData({ ...formData, [name]: files[0] });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const apiUrl = '/api/v1/tambahmahasiswa';
+
+    const formDataToSend = new FormData();
+    for (const key in formData) {
+      formDataToSend.append(key, formData[key]);
+    }
+
+    try {
+      const response = await axios.post(apiUrl, formDataToSend, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.status === 200) {
+        console.log('Mahasiswa berhasil ditambahkan');
+      } else {
+        console.error('Gagal menambahkan Mahasiswa');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   return (
     <Layout>
       <div className="flex flex-col  w-full bg-background">
@@ -17,14 +104,16 @@ function MahasiswaTambah() {
           </h2>
         </div>
         <div className="container w-[976px] h-full rounded-lg overflow-hidden bg-white p-5">
-          <form action="">
+          <form onSubmit={handleSubmit}>
             <div className="mb-4 flex flex-row justify-between">
               <label className="font-medium text-primary text-1xl flex items-center w-44">
                 Nama Mahasiswa
               </label>
               <input
                 type="text"
-                name="namaMahasiswa"
+                name="nama_mahasiswa"
+                value={formData.nama_mahasiswa}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan Nama Mahasiswa"
               />
@@ -37,6 +126,8 @@ function MahasiswaTambah() {
               <input
                 type="text"
                 name="npm"
+                value={formData.npm}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan NPM"
               />
@@ -48,7 +139,9 @@ function MahasiswaTambah() {
               </label>
               <input
                 type="text"
-                name="jenisKelamin"
+                name="jk"
+                value={formData.jk}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan Jenis Kelamin"
               />
@@ -61,6 +154,8 @@ function MahasiswaTambah() {
               <input
                 type="text"
                 name="alamat"
+                value={formData.alamat}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan Alamat"
               />
@@ -73,8 +168,8 @@ function MahasiswaTambah() {
               <input
                 type="file"
                 name="foto"
+                onChange={handleFileChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
-                placeholder="Pilih Foto"
               />
             </div>
 
@@ -85,6 +180,8 @@ function MahasiswaTambah() {
               <input
                 type="text"
                 name="status"
+                value={formData.status}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan Status"
               />
@@ -97,6 +194,8 @@ function MahasiswaTambah() {
               <input
                 type="text"
                 name="noTelepon"
+                value={formData.notlp}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan No Telepon"
               />
@@ -109,6 +208,8 @@ function MahasiswaTambah() {
               <input
                 type="text"
                 name="email"
+                value={formData.email}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan Email"
               />
@@ -121,6 +222,8 @@ function MahasiswaTambah() {
               <input
                 type="password"
                 name="password"
+                value={formData.password}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan Password"
               />
@@ -133,6 +236,8 @@ function MahasiswaTambah() {
               <input
                 type="text"
                 name="kelas"
+                value={formData.id_kelas}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan Kelas"
               />
@@ -145,6 +250,8 @@ function MahasiswaTambah() {
               <input
                 type="text"
                 name="namaKelas"
+                value={formData.nama_kelas}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan Nama Kelas"
               />

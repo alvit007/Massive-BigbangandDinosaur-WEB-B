@@ -10,7 +10,7 @@ function Mahasiswa() {
   useEffect(() => {
     // Mengambil token dari local storage
     const token = localStorage.getItem("token");
-    
+  
     // Melakukan permintaan HTTP dengan token
     const fetchData = async () => {
       try {
@@ -28,29 +28,30 @@ function Mahasiswa() {
         console.error("Error fetching data:", error.message);
       }
     };
-
+  
     if (token) {
       fetchData();
     }
   }, []);
+  
 
-  const handleDeleteMahasiswa = async (id) => {
+  const handleDeleteMahasiswa = async (id_mahasiswa) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.delete(`/api/v1/hapusdatamahasiswa/${id}`, {
+      await axios.delete(`/api/v1/hapusdatamahasiswa/${id_mahasiswa}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      
+  
       // Jika penghapusan berhasil, perbarui state mahasiswaData
-      // setMahasiswa((prevData) => prevData.filter(mahasiswa => mahasiswa.id !== id));
-      console.log(response.data)
-      console.log(id)
+      setMahasiswa((prevData) => prevData.filter(mahasiswa => mahasiswa.id_mahasiswa !== id_mahasiswa));
+      console.log("Mahasiswa dihapus dengan sukses");
     } catch (error) {
-      console.error("Error deleting data:", error.message);
+      console.error("Error menghapus data:", error.message);
     }
   };
+  
   
 
 
@@ -95,7 +96,7 @@ function Mahasiswa() {
                         <Pencil stroke="#26A1F4" />
                       </Link>
                       <button
-                        onClick={() => handleDeleteMahasiswa(mahasiswa.id)}
+                        onClick={() => handleDeleteMahasiswa(mahasiswa.id_mahasiswa)}
                       >
                         <Trash2 stroke="#BF0404" />
                       </button>
