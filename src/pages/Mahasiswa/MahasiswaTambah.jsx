@@ -3,6 +3,8 @@ import axios from "axios";
 import Layout from "../Layout";
 
 function MahasiswaTambah() {
+  const [npm, setNpm] = useState("");
+
   const [token, setToken] = useState("");
   const [formData, setFormData] = useState({
     nama_mahasiswa: "",
@@ -21,7 +23,7 @@ function MahasiswaTambah() {
   useEffect(() => {
     const fetchToken = async () => {
       try {
-        const tokenResponse = await axios.post("/api/v1/tambahmahasiswa", {});
+        const tokenResponse = await axios.post(`/api/v1/tambahmahasiswa`, {});
         setToken(tokenResponse.data.token);
       } catch (error) {
         console.error("Gagal mengambil token:", error);

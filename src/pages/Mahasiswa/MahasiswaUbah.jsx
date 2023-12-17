@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../Layout";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function MahasiswaUbah() {
-  const [mahasiswa, setMahasiswa] = useState([]);
-
   const [formData, setFormData] = useState({
     namaMahasiswa: "",
     npm: "",
@@ -20,23 +18,12 @@ function MahasiswaUbah() {
     namaKelas: "",
   });
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-
-
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  }
-
   const { id_mahasiswa } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Mengambil token dari local storage
     const token = localStorage.getItem("token");
 
-    // Melakukan permintaan HTTP dengan token
     const fetchData = async () => {
       try {
         const response = await axios.get(
@@ -49,16 +36,15 @@ function MahasiswaUbah() {
         );
 
         const mahasiswaData = response.data.values[0];
-        setMahasiswa(mahasiswaData);
         setFormData({
-          namaMahasiswa: mahasiswaData.nama_mahasiswa,
           npm: mahasiswaData.npm,
+          namaMahasiswa: mahasiswaData.nama_mahasiswa,
           jenisKelamin: mahasiswaData.jk,
           alamat: mahasiswaData.alamat,
           status: mahasiswaData.status,
           noTelepon: mahasiswaData.notlp,
           email: mahasiswaData.email,
-          password: "", // Sesuaikan dengan kebutuhan
+          password: mahasiswaData.password,
           kelas: mahasiswaData.id_kelas,
           namaKelas: mahasiswaData.nama_kelas,
         });
@@ -70,7 +56,39 @@ function MahasiswaUbah() {
     if (token) {
       fetchData();
     }
-  }, []);
+  }, [id_mahasiswa]); // Add id_mahasiswa as a dependency
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleUpdate = async (event) => {
+    event.preventDefault();
+
+    const token = localStorage.getItem("token");
+
+    try {
+      await axios.put(
+        `/api/v1/ubahdatamahasiswa/${id_mahasiswa}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Redirect to the Mahasiswa detail page or any other page you want
+      navigate.push(`/ubahdatamahasiswa/${id_mahasiswa}`);
+    } catch (error) {
+      console.error("Error updating data:", error.message);
+    }
+  };
 
   return (
     <Layout>
@@ -87,7 +105,7 @@ function MahasiswaUbah() {
           </h2>
         </div>
         <div className="container w-[976px] h-full rounded-lg overflow-hidden bg-white p-5">
-          <form action="">
+          <form onSubmit={handleUpdate}>
             <div className="mb-4 flex flex-row justify-between">
               <label className="font-medium text-primary text-1xl flex items-center w-44">
                 Nama Mahasiswa
