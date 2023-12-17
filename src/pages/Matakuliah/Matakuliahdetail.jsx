@@ -1,20 +1,27 @@
-import React, {useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import matkul1_detail from "../../assets/matkul1_detail.png";
 import Layout from "../Layout";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
-function MatakuliahDetail({ matkulId }) {
-
-  
+function MatakuliahDetail() {
+  const [matakuliah, setMatakuliah] = useState([]);
+  const {id_matakuliah} = useParams();
   
   useEffect(() => {
-     const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
     const fetchMovieDetails = async () => {
       try {
-        const response = await fetch(
-          `api/v1/matakuliahbyid/${matkulId}`
+        const response = await axios.get(
+          `/api/v1/matakuliahbyid/${id_matakuliah}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            }
+          }
         );
-        const data = await response.json();
-        console.log(data);
+        console.log(response.data.values[0]);
+
+      setMatakuliah(response.data.values[0]);
       } catch (error) {
         console.error("Error fetching movie details:", error);
       }
@@ -26,7 +33,7 @@ function MatakuliahDetail({ matkulId }) {
     }
 
     fetchMovieDetails();
-  }, [matkulId]);
+  }, [id_matakuliah]);
 
   return (
     <Layout>
@@ -51,9 +58,9 @@ function MatakuliahDetail({ matkulId }) {
           </div>
           <div className="flex flex-col justify-between w-[400px] h-[190px] ml-5">
             <span className="text-primary text-4xl font-semibold">
-              MATEMATIKA DASAR
+              {matakuliah.nama_matakuliah}
             </span>
-            <span className="text-primary text-2xl font-semibold">MK001</span>
+            <span className="text-primary text-2xl font-semibold">{matakuliah.kode_matakuliah}</span>
             <span className="text-primary text-2xl font-semibold">2023</span>
             <div className="bg-background w-full h-2 rounded-full overflow-hidden">
               <div className="bg-primary h-2 w-28"></div>
