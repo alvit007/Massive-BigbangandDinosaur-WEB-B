@@ -111,7 +111,7 @@ function MatakuliahTambah() {
               value={formData.kode_matakuliah}
               onChange={handleInputChange}
               className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
-              placeholder="Masukkan Nama Mata Kuliah"
+              placeholder="Masukkan Kode Mata Kuliah"
             />
           </div>
 
