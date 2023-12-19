@@ -1,10 +1,27 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import GambarProfile from "../assets/profile.png";
 
 function Navbar() {
   const user = localStorage.getItem("user");
   const role = localStorage.getItem("role");
+  const navigate = useNavigate();
+  const tokenExpiration = localStorage.getItem("tokenExpiration");
+
+  useEffect(() => {
+    const checkTokenExpiration = () => {
+      const currentTime = new Date().getTime();
+      if (tokenExpiration && currentTime > parseInt(tokenExpiration, 10)) {
+        navigate("/login");
+        localStorage.clear();
+      }
+    };
+
+    const tokenCheckInterval = setInterval(checkTokenExpiration, 1000);
+
+    return () => clearInterval(tokenCheckInterval);
+  }, [navigate, tokenExpiration]);
+
 
   return (
     <div className="h-[3.5rem] bg-white">

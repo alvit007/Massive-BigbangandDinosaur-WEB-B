@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MapPin } from "lucide-react";
 import Layout from "../Layout";
 import axios from "axios";
-import gambarMatakuliah from "../../assets/matkul1.png";
+import gambarMatakuliah from "../../assets/matkul1.png"
 
 function Matakuliah() {
   const [matakuliah, setMataKuliah] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const user = localStorage.getItem("role");
+
   // fetch data
   useEffect(() => {
     // Mengambil token dari local storage
@@ -25,6 +25,7 @@ function Matakuliah() {
 
         // Menggunakan data dari server
         setMataKuliah(response.data.values);
+        console.log(response.data.values);
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
@@ -66,13 +67,12 @@ function Matakuliah() {
             {/* Matkul Pendek */}
             {matakuliah.map((matakuliah, index) => (
               <Link
-                key={index}
-                to={`detail/${matakuliah.id_matakuliah}`}
+                key={index} to={`detail/${matakuliah.id_matakuliah}`}
                 className="bg-white w-[600px] h-[228px] pl-[50px] mb-3 rounded-lg grid grid-cols-3 justify-items-center hover:brightness-75 hover:transition-all cursor-pointer"
                 onClick={handleDetailMatakuliah}
               >
                 <div className="w-[255px] h-[178px] overflow-hidden rounded-lg self-center">
-                  <img src={gambarMatakuliah} alt={gambarMatakuliah} />
+                  <img src={matakuliah.foto} alt={matakuliah.foto} />
                 </div>
                 <div className="flex flex-col justify-between mt-[25px] ml-32 w-[220px] h-[175px]">
                   <span className="text-primary text-sm font-medium">
@@ -129,7 +129,7 @@ function Matakuliah() {
                 className="bg-[#BF0404] w-full text-white rounded-lg w-330px hover:bg-[#920202] text-md py-2 mt-2"
                 onClick={handleTambahMatakuliah}
               >
-                {user === "2" ? "Ambil Mata Kuliah" : "Tambah Mata Kuliah"}
+                Tambah Mata Kuliah
               </button>
             </div>
           </div>

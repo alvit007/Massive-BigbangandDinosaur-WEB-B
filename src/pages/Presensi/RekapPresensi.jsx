@@ -4,6 +4,7 @@ import Layout from "../Layout";
 import axios from "axios";
 
 function RekapPresensi() {
+  const [rekap, setRekap] = useState([]);
   const [data, setData] = useState([]);
   const [matakuliah, setMatakuliah] = useState("");
   const { id_jadwal } = useParams();
@@ -22,9 +23,31 @@ function RekapPresensi() {
             },
           }
         );
-
+        // Set untuk mengambil data matakuliah
         setMatakuliah(responseMatakuliah.data.values[0]);
-        setData(responseMatakuliah.data.values);
+
+        // Set untuk mengambil data mahasiswa yang berdasarkan id_jadwal
+        const responseMahasiswa = await axios.get(`/api/v1/jadwal`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const allMahasiswa = responseMahasiswa.data.values;
+        const id_matakuliah_jadwal =
+          responseMahasiswa.data.values[0]?.id_matakuliah_jadwal;
+        
+        console.log(id_matakuliah_jadwal)
+
+        const filteredMahasiswaByJadwal = allMahasiswa.filter(
+          (mahasiswa) => mahasiswa.id_matakuliah_jadwal === id_matakuliah_jadwal
+        );
+
+        console.log(filteredMahasiswaByJadwal);
+
+        console.log(filteredMahasiswaByJadwal);
+
+        setData(filteredMahasiswaByJadwal);
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
@@ -86,22 +109,22 @@ function RekapPresensi() {
                   <tr>
                     <td className="border p-2">{item.nama_mahasiswa}</td>
                     <td className="border p-2">{item.npm}</td>
-                    <td className="border p-2 text-center">S</td>
                     <td className="border p-2 text-center">H</td>
-                    <td className="border p-2 text-center">A</td>
-                    <td className="border p-2 text-center">H</td>
-                    <td className="border p-2 text-center">H</td>
-                    <td className="border p-2 text-center">S</td>
-                    <td className="border p-2 text-center">S</td>
-                    <td className="border p-2 text-center">H</td>
-                    <td className="border p-2 text-center">A</td>
-                    <td className="border p-2 text-center">H</td>
-                    <td className="border p-2 text-center">H</td>
-                    <td className="border p-2 text-center">A</td>
-                    <td className="border p-2 text-center">H</td>
-                    <td className="border p-2 text-center">H</td>
-                    <td className="border p-2 text-center">H</td>
-                    <td className="border p-2 text-center">S</td>
+                    <td className="border p-2 text-center">-</td>
+                    <td className="border p-2 text-center">-</td>
+                    <td className="border p-2 text-center">-</td>
+                    <td className="border p-2 text-center">-</td>
+                    <td className="border p-2 text-center">-</td>
+                    <td className="border p-2 text-center">-</td>
+                    <td className="border p-2 text-center">-</td>
+                    <td className="border p-2 text-center">-</td>
+                    <td className="border p-2 text-center">-</td>
+                    <td className="border p-2 text-center">-</td>
+                    <td className="border p-2 text-center">-</td>
+                    <td className="border p-2 text-center">-</td>
+                    <td className="border p-2 text-center">-</td>
+                    <td className="border p-2 text-center">-</td>
+                    <td className="border p-2 text-center">-</td>
                   </tr>
                 </tbody>
               ))}

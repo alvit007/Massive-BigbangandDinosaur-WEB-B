@@ -21,8 +21,10 @@ function Login() {
       
       if (response.data.success) {
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userid", response.data.userid);
         localStorage.setItem("user", response.data.user);
         localStorage.setItem("role", response.data.role);
+        localStorage.setItem("expires", response.data.expires);
         navigate("/dashboard");
       } else {
         setMsg("Username and password are not valid");

@@ -25,11 +25,15 @@ function Qrcode() {
   const handleMarkAttendance = async () => {
     try {
       const token = localStorage.getItem("token");
+      const waktuSekarang = new Date();
+      const waktuFormatted = waktuSekarang.toISOString().split("T")[0];
+      const tanggalFormatted = waktuSekarang.toLocaleDateString();
       const response = await axios.post(
         "/api/v1/tambahpresensi",
         {
           kode_matakuliah,
-          waktu: "2023-01-01",
+          waktu: waktuFormatted,
+          tanggal: tanggalFormatted,
           lokasi: randomValue,
         },
         {
@@ -70,10 +74,19 @@ function Qrcode() {
     fetchData();
   }, [npm]);
 
-  // Susun informasi yang ingin disertakan dalam QR Code
+  const waktuSekarang = new Date();
+  const jam = waktuSekarang.getHours();
+  const menit = waktuSekarang.getMinutes();
+  const detik = waktuSekarang.getSeconds();
+  const waktuFormatted = `${jam}:${menit}:${detik}`;
+  const tahun = waktuSekarang.getFullYear();
+  const bulan = waktuSekarang.getMonth() + 1; 
+  const tanggal = waktuSekarang.getDate();
+  const tanggalFormatted = `${tahun}-${bulan < 10 ? "0" : ""}${bulan}-${tanggal < 10 ? "0" : ""}${tanggal}`;
   const qrCodeData = {
     kode_matakuliah,
-    waktu: "2023-01-01",
+    waktu: waktuFormatted,
+    tanggal: tanggalFormatted,
     lokasi: randomValue,
   };
 
