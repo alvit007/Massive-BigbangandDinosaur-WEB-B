@@ -8,7 +8,7 @@ function MatakuliahTambah() {
     nama_matakuliah: "",
     gambar: null,
     kode_matakuliah: "",
-    ruangan: "",
+    sks: "",
     jam_mulai: "",
     jam_selesai: ""
   });
@@ -32,9 +32,7 @@ function MatakuliahTambah() {
     formDatatoSend.append("nama_matakuliah", formData.nama_matakuliah);
     formDatatoSend.append("gambar", formData.gambar);
     formDatatoSend.append("kode_matakuliah", formData.kode_matakuliah);
-    formDatatoSend.append("ruangan", formData.ruangan);
-    formDatatoSend.append("jam_mulai", formData.jam_mulai);
-    formDatatoSend.append("jam_selesai", formData.jam_selesai);
+    formDatatoSend.append("sks", formData.sks);
 
     try {
       const token = localStorage.getItem("token");
@@ -119,49 +117,16 @@ function MatakuliahTambah() {
 
           <div className="mb-4 flex flex-row justify-between">
             <label className="font-medium text-primary text-1xl flex items-center w-44">
-              Ruangan
+              Jumlah SKS
             </label>
-            <select
+            <input
                 required
-                name="ruangan"
-                value={formData.ruangan}
+                type="text"
+                name="sks"
                 onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
-              >
-                <option value="">Pilih Kelas</option>
-                <option value="1">LT1-1A</option>
-                <option value="2">LT1-2A</option>
-                <option value="3">LT1-3A</option>
-                <option value="4">LT2-1A</option>
-                <option value="5">LT2-2A</option>
-                {/* Add more options as needed */}
-              </select>
-          </div>
-          <div className="mb-4 flex flex-row justify-between">
-            <label className="font-medium text-primary text-1xl flex items-center w-44">
-              Jam Mulai
-            </label>
-            <input required
-              type="time"
-              name="jam_mulai"
-              value={formData.jam_mulai}
-              onChange={handleInputChange}
-              className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
-              placeholder="Masukkan Jam Mulai Perkuliahan"
-            />
-          </div>
-          <div className="mb-4 flex flex-row justify-between">
-            <label className="font-medium text-primary text-1xl flex items-center w-44">
-              Jam Selesai
-            </label>
-            <input required
-              type="time"
-              name="jam_selesai"
-              value={formData.jam_selesai}
-              onChange={handleInputChange}
-              className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
-              placeholder="Masukkan Jam Selesai Perkuliahan"
-            />
+                placeholder="Masukkan Jumlah SKS"
+              />
           </div>
 
             <button
