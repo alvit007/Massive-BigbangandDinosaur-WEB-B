@@ -17,8 +17,7 @@ function MahasiswaTambah() {
     nama_kelas: "",
     notlp: "",
   });
-
-
+   const [errorMessages, setErrorMessages] = useState([]);
 
   const navigate = useNavigate();
 
@@ -27,8 +26,8 @@ function MahasiswaTambah() {
   };
 
   const handleFileChange = (e) => {
-   const file = e.target.files[0];
-   setFormData({ ...formData, foto: file });
+    const file = e.target.files[0];
+    setFormData({ ...formData, foto: file });
   };
 
   const handleSubmit = async (e) => {
@@ -60,13 +59,22 @@ function MahasiswaTambah() {
       );
       if (response.status === 200) {
         console.log("Mahasiswa berhasil ditambahkan");
-        alert("Mahasiswa Berhasil di tambahkan")
-        navigate("/mahasiswa"); // Ganti dengan path yang sesuai
+        alert("Mahasiswa Berhasil ditambahkan");
+        setErrorMessages(""); // Reset error message
+        navigate("/mahasiswa"); // Replace with the appropriate path
+      } else if (response.status === 400) {
+        // Handle validation errors
+        setErrorMessages(response.data.error);
       } else {
-        console.error("Gagal menambahkan Mahasiswa");
+        console.error("API Error:", response.status, response.statusText);
       }
     } catch (error) {
-      console.log(error.message);
+      if (error.response) {
+        // Handle specific API error here
+        setErrorMessages(error.response.data.error);
+      } else {
+        console.error("Unexpected Error:", error);
+      }
     }
   };
 
@@ -83,6 +91,20 @@ function MahasiswaTambah() {
             </span>
             <span className="text-sky-600 text-xl font-semibold ">Tambah</span>
           </h2>
+        </div>
+
+        <div role="alert" className="mb-3">
+          <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+            Warning!!
+          </div>
+          <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+            <p>
+              {" "}
+              {errorMessages && (
+                <div className="text-red-500">{errorMessages}</div>
+              )}
+            </p>
+          </div>
         </div>
         <div className="container w-[976px] h-full rounded-lg overflow-hidden bg-white p-5">
           <form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -107,7 +129,7 @@ function MahasiswaTambah() {
               </label>
               <input
                 required
-                type="text"
+                type="number"
                 name="npm"
                 value={formData.npm}
                 onChange={handleInputChange}
@@ -180,7 +202,7 @@ function MahasiswaTambah() {
               </label>
               <input
                 required
-                type="text"
+                type="number"
                 name="notlp"
                 value={formData.notlp}
                 onChange={handleInputChange}
@@ -224,10 +246,9 @@ function MahasiswaTambah() {
                 Kelas
               </label>
               <select
-                required
                 name="id_kelas"
-                value={formData.id_kelas}
                 onChange={handleInputChange}
+                value={formData.id_kelas}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
               >
                 <option value="">Pilih Kelas</option>
