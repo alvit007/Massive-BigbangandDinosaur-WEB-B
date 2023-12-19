@@ -36,7 +36,6 @@ function MulaiPresensi() {
         },
       });
       setPresensi(response.data.values[0]);
-      console.log(response.data.values[0]);
     } catch (error) {
       console.error("Error fetching data:", error.message);
     }
@@ -69,7 +68,7 @@ function MulaiPresensi() {
         <div className="flex flex-col  bg-background">
           <div className="flex flex-row justify-between">
             <h1 className="text-3xl font-semibold text-primary">
-              Rekap Presensi
+              Mulai Presensi
             </h1>
             <h2 className="self-center">
               <span className="text-primary text-xl font-semibold">

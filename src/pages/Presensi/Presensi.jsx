@@ -10,6 +10,9 @@ function Presensi() {
   useEffect(() => {
     // Mengambil token dari local storage
     const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+    const userid = localStorage.getItem("userid");
+
     // Melakukan permintaan HTTP dengan token
     const fetchData = async () => {
       try {
@@ -18,18 +21,22 @@ function Presensi() {
             Authorization: `Bearer ${token}`,
           },
         });
-        setPresensi(response.data.values);
+        const filteredPresensi =
+          role === "2"
+            ? response.data.values.filter((jadwal) => {
+                return String(jadwal.id_dosen_jadwal) === String(userid);
+              })
+            : response.data.values;
+        setPresensi(filteredPresensi);
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
     };
 
-    if (token) {
+    if (token && role) {
       fetchData();
     }
   }, []);
-  // end fetch
-  
 
   return (
     <>
@@ -47,7 +54,9 @@ function Presensi() {
               className="p-5 rounded-r-sm mb-5 bg-white h-[250px]"
             >
               <p className="text-blue-400">S1 Teknik Informatika</p>
-              <h4>{item.nama_matakuliah}_{item.kode_matakuliah}</h4>
+              <h4>
+                {item.nama_matakuliah}_{item.kode_matakuliah}
+              </h4>
               <hr className="bg-dark-500" />
               <p className="mt-2">Hari : {item.hari}</p>
               <p>

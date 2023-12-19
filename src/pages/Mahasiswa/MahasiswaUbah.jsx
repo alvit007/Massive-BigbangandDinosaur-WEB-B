@@ -34,7 +34,7 @@ function MahasiswaUbah() {
             },
           }
         );
-
+        console.log(response.data.values[0])
         const mahasiswaData = response.data.values[0];
         setFormData({
           npm: mahasiswaData.npm,
