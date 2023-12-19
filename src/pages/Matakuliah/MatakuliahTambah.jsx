@@ -1,85 +1,62 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import Layout from "../Layout";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function MatakuliahTambah() {
-  const [token, setToken] = useState("");
   const [formData, setFormData] = useState({
     nama_matakuliah: "",
-    foto: "",
+    gambar: null,
     kode_matakuliah: "",
-    id_matakuliah: "",
-    sks: "",
-    });
+    ruangan: "",
+    jam_mulai: "",
+    jam_selesai: ""
+  });
 
-    useEffect(() => {
-      const fetchToken = async () => {
-        try {
-          const tokenResponse = await axios.post("/api/v1/tambahmatakuliah", {});
-          setToken(tokenResponse.data.token);
-        } catch (error) {
-          console.error("Gagal mengambil token:", error);
-        }
-      };
 
-      fetchToken();
-  }, []);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get("/api/v1/tambahmatakuliah", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      // Lakukan sesuatu dengan data yang diterima
-      console.log(response.data);
-    } catch (error) {
-      console.error("Gagal mengambil data:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (token) {
-      fetchData();
-    }
-  }, [token]);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleFileChange = (e) => {
-    const { name, files } = e.target;
-    setFormData({ ...formData, [name]: files[0] });
+   const file = e.target.files[0];
+   setFormData({ ...formData, gambar: file });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const apiUrl = '/api/v1/tambahmatakuliah';
-
-    const formDataToSend = new FormData();
-    for (const key in formData) {
-      formDataToSend.append(key, formData[key]);
-    }
+    const formDatatoSend = new FormData();
+    formDatatoSend.append("nama_matakuliah", formData.nama_matakuliah);
+    formDatatoSend.append("gambar", formData.gambar);
+    formDatatoSend.append("kode_matakuliah", formData.kode_matakuliah);
+    formDatatoSend.append("ruangan", formData.ruangan);
+    formDatatoSend.append("jam_mulai", formData.jam_mulai);
+    formDatatoSend.append("jam_selesai", formData.jam_selesai);
 
     try {
-      const response = await axios.post(apiUrl, formDataToSend, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        "/api/v1/tambahmatakuliah",
+        formDatatoSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (response.status === 200) {
-        console.log('Mahatakuliah berhasil ditambahkan');
+        console.log("Matakuliah berhasil ditambahkan");
+        alert("Matakuliah Berhasil di tambahkan")
+        navigate("/matakuliah"); // Ganti dengan path yang sesuai
       } else {
-        console.error('Gagal menambahkan Matakuliah');
+        console.error("Gagal menambahkan Matakuliah");
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.log(error.message);
     }
   };
 
@@ -87,7 +64,9 @@ function MatakuliahTambah() {
     <Layout>
     <div className="flex flex-col  w-full bg-background">
       <div className=" flex flex-row justify-between mb-[26px]">
-        <h1 className="text-3xl font-semibold text-primary">Matakuliah</h1>
+        <h1 className="text-3xl font-semibold text-primary">
+          Form Matakuliah
+        </h1>
         <h2 className="self-center">
           <span className="text-primary text-xl font-semibold">
             Mata Kuliah /{" "}
@@ -96,12 +75,12 @@ function MatakuliahTambah() {
         </h2>
       </div>
       <div className="container w-[976px] h-full rounded-lg overflow-hidden bg-white p-5">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} encType="multipart/form-data"> 
           <div className="mb-4 flex flex-row justify-between">
             <label className="font-medium text-primary text-1xl flex items-center w-44">
-               Mata Kuliah
+               Nama Mata Kuliah
             </label>
-            <input
+            <input required
               type="text"
               name="nama_matakuliah"
               value={formData.nama_matakuliah}
@@ -116,10 +95,23 @@ function MatakuliahTambah() {
                Gambar
             </label>
             <input
-              type="file"
-              name="foto"
-              value={formData.foto}
-              onChange={handleFileChange}
+                required
+                type="file"
+                name="gambar"
+                onChange={handleFileChange}
+                className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
+              />
+          </div>
+
+          <div className="mb-4 flex flex-row justify-between">
+            <label className="font-medium text-primary text-1xl flex items-center w-44">
+              Kode Mata Kuliah
+            </label>
+            <input required
+              type="text"
+              name="kode_matakuliah"
+              value={formData.kode_matakuliah}
+              onChange={handleInputChange}
               className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
               placeholder="Masukkan Nama Mata Kuliah"
             />
@@ -127,55 +119,48 @@ function MatakuliahTambah() {
 
           <div className="mb-4 flex flex-row justify-between">
             <label className="font-medium text-primary text-1xl flex items-center w-44">
-              Kode Mata Kuliah
-            </label>
-            <input
-              type="text"
-              name="Kode Matkul"
-              value={formData.kode_matakuliah}
-              onChange={handleInputChange}
-              className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
-              placeholder="Masukkan Kode Mata Kuliah"
-            />
-          </div>
-
-          <div className="mb-4 flex flex-row justify-between">
-            <label className="font-medium text-primary text-1xl flex items-center w-44">
               Ruangan
             </label>
-            <input
-              type="text"
-              name="kelas"
-              // value={formData.kelas}
-              // onChange={handleChange}
-              className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
-              placeholder="Masukkan Kelas"
-            />
+            <select
+                required
+                name="ruangan"
+                value={formData.ruangan}
+                onChange={handleInputChange}
+                className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
+              >
+                <option value="">Pilih Kelas</option>
+                <option value="1">LT1-1A</option>
+                <option value="2">LT1-2A</option>
+                <option value="3">LT1-3A</option>
+                <option value="4">LT2-1A</option>
+                <option value="5">LT2-2A</option>
+                {/* Add more options as needed */}
+              </select>
           </div>
           <div className="mb-4 flex flex-row justify-between">
             <label className="font-medium text-primary text-1xl flex items-center w-44">
               Jam Mulai
             </label>
-            <input
-              type="text"
-              name="kelas"
-              // value={formData.kelas}
-              // onChange={handleChange}
+            <input required
+              type="time"
+              name="jam_mulai"
+              value={formData.jam_mulai}
+              onChange={handleInputChange}
               className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
-              placeholder="Masukkan Kelas"
+              placeholder="Masukkan Jam Mulai Perkuliahan"
             />
           </div>
           <div className="mb-4 flex flex-row justify-between">
             <label className="font-medium text-primary text-1xl flex items-center w-44">
               Jam Selesai
             </label>
-            <input
-              type="text"
-              name="kelas"
-              // value={formData.kelas}
-              // onChange={handleChange}
+            <input required
+              type="time"
+              name="jam_selesai"
+              value={formData.jam_selesai}
+              onChange={handleInputChange}
               className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
-              placeholder="Masukkan Kelas"
+              placeholder="Masukkan Jam Selesai Perkuliahan"
             />
           </div>
 
