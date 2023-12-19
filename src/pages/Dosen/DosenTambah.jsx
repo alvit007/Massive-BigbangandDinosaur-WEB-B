@@ -1,7 +1,69 @@
-import React from "react";
+import React, { useState} from "react";
 import Layout from "../Layout";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function DosenTambah() {
+  const [formData, setFormData] = useState({
+    nama_dosen: "",
+    nip: "",
+    jk: "",
+    alamat: "",
+    foto: null,
+    status: "",
+    notlp: "",
+    email: "",
+    password: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleFileChange = (e) => {
+   const file = e.target.files[0];
+   setFormData({ ...formData, foto: file });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formDatatoSend = new FormData();
+    formDatatoSend.append("nama_dosen", formData.nama_dosen);
+    formDatatoSend.append("nip", formData.nip);
+    formDatatoSend.append("jk", formData.jk);
+    formDatatoSend.append("alamat", formData.alamat);
+    formDatatoSend.append("foto", formData.foto);
+    formDatatoSend.append("status", formData.status);
+    formDatatoSend.append("notlp", formData.notlp);
+    formDatatoSend.append("email", formData.email);
+    formDatatoSend.append("password", formData.password);
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        "/api/v1/tambahdatadosen",
+        formDatatoSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status === 200) {
+        console.log("dosen berhasil ditambahkan");
+        alert("dosen Berhasil di tambahkan")
+        navigate("/dosen"); // Ganti dengan path yang sesuai
+      } else {
+        console.error("Gagal menambahkan dosen");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <Layout>
       <div className="flex flex-col  w-full bg-background">
@@ -17,14 +79,16 @@ function DosenTambah() {
           </h2>
         </div>
         <div className="container w-[976px] h-full rounded-lg overflow-hidden bg-white p-5">
-          <form action="">
-            <div className="mb-4 flex flex-row justify-between">
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
+          <div className="mb-4 flex flex-row justify-between">
               <label className="font-medium text-primary text-1xl flex items-center w-44">
                 Nama Dosen
               </label>
               <input
                 type="text"
-                name="namaMahasiswa"
+                name="nama_dosen"
+                value={formData.nama_dosen}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan Nama Dosen"
               />
@@ -36,7 +100,9 @@ function DosenTambah() {
               </label>
               <input
                 type="text"
-                name="npm"
+                name="nip"
+                value={formData.nip}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan NIP"
               />
@@ -48,7 +114,9 @@ function DosenTambah() {
               </label>
               <input
                 type="text"
-                name="jenisKelamin"
+                name="jk"
+                value={formData.jk}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan Jenis Kelamin"
               />
@@ -61,6 +129,8 @@ function DosenTambah() {
               <input
                 type="text"
                 name="alamat"
+                value={formData.alamat}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan Alamat"
               />
@@ -73,6 +143,7 @@ function DosenTambah() {
               <input
                 type="file"
                 name="foto"
+                onChange={handleFileChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Pilih Foto"
               />
@@ -85,6 +156,8 @@ function DosenTambah() {
               <input
                 type="text"
                 name="status"
+                value={formData.status}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan Status"
               />
@@ -96,7 +169,9 @@ function DosenTambah() {
               </label>
               <input
                 type="text"
-                name="noTelepon"
+                name="notlp"
+                value={formData.notlp}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan No Telepon"
               />
@@ -109,6 +184,8 @@ function DosenTambah() {
               <input
                 type="text"
                 name="email"
+                value={formData.email}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan Email"
               />
@@ -121,6 +198,8 @@ function DosenTambah() {
               <input
                 type="password"
                 name="password"
+                value={formData.password}
+                onChange={handleInputChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan Password"
               />

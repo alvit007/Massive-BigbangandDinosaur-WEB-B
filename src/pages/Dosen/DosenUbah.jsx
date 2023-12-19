@@ -56,9 +56,7 @@ function DosenUbah() {
           status: dosenData.status,
           noTelepon: dosenData.notlp,
           email: dosenData.email,
-          password: "", // Sesuaikan dengan kebutuhan
-          kelas: dosenData.id_kelas,
-          namaKelas: dosenData.nama_kelas,
+          password: "", 
         });
       } catch (error) {
         console.error("Error fetching data:", error.message);

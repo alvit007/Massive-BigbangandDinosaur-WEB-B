@@ -13,7 +13,9 @@ function MahasiswaUbah() {
     status: "",
     noTelepon: "",
     email: "",
-    password: "",
+    passwordLama: "",
+    passwordBaru: "",
+    konfirmasiPassword: "",
     kelas: "",
     namaKelas: "",
   });
@@ -44,7 +46,9 @@ function MahasiswaUbah() {
           status: mahasiswaData.status,
           noTelepon: mahasiswaData.notlp,
           email: mahasiswaData.email,
-          password: mahasiswaData.password,
+          passwordLama: mahasiswaData.passwordLama,
+          passwordBaru: mahasiswaData.passwordBaru,
+          konfirmasiPassword: mahasiswaData.konfirmasiPassword,
           kelas: mahasiswaData.id_kelas,
           namaKelas: mahasiswaData.nama_kelas,
         });
@@ -219,17 +223,46 @@ function MahasiswaUbah() {
 
             <div className="mb-4 flex flex-row justify-between">
               <label className="font-medium text-primary text-1xl flex items-center w-44">
-                Password
+                Password Lama
               </label>
               <input
                 type="password"
                 name="password"
-                value={formData.password}
+                value={formData.passwordLama}
                 onChange={handleChange}
                 className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
                 placeholder="Masukkan Password"
               />
             </div>
+
+            <div className="mb-4 flex flex-row justify-between">
+              <label className="font-medium text-primary text-1xl flex items-center w-44">
+                Password Baru
+              </label>
+              <input
+                type="password"
+                name="password"
+                value={formData.passwordBaru}
+                onChange={handleChange}
+                className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
+                placeholder="Masukkan Password"
+              />
+            </div>
+
+            <div className="mb-4 flex flex-row justify-between">
+              <label className="font-medium text-primary text-1xl flex items-center w-44">
+                Konfirmasi Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                value={formData.konfirmasiPassword}
+                onChange={handleChange}
+                className="mt-1 p-2 w-4/5 border rounded-md pl-7 text-primary bg-background"
+                placeholder="Masukkan Password"
+              />
+            </div>
+
 
             <div className="mb-4 flex flex-row justify-between">
               <label className="font-medium text-primary text-1xl flex items-center w-44">
