@@ -5,10 +5,10 @@ import Layout from "../Layout";
 function MatakuliahTambah() {
   const [token, setToken] = useState("");
   const [formData, setFormData] = useState({
-    foto: null,
-    id_matakuliah: "",
-    kode_matakuliah: "",
     nama_matakuliah: "",
+    foto: "",
+    kode_matakuliah: "",
+    id_matakuliah: "",
     sks: "",
     });
 
