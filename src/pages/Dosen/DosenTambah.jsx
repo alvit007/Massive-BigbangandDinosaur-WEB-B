@@ -1,6 +1,6 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import Layout from "../Layout";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function DosenTambah() {
@@ -16,6 +16,8 @@ function DosenTambah() {
     password: "",
   });
 
+  const [errorMessages, setErrorMessages] = useState([]); // Define the state
+
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -23,8 +25,8 @@ function DosenTambah() {
   };
 
   const handleFileChange = (e) => {
-   const file = e.target.files[0];
-   setFormData({ ...formData, foto: file });
+    const file = e.target.files[0];
+    setFormData({ ...formData, foto: file });
   };
 
   const handleSubmit = async (e) => {
@@ -53,14 +55,23 @@ function DosenTambah() {
         }
       );
       if (response.status === 200) {
-        console.log("dosen berhasil ditambahkan");
-        alert("dosen Berhasil di tambahkan")
-        navigate("/dosen"); // Ganti dengan path yang sesuai
+        console.log("Dosen berhasil ditambahkan");
+        alert("Dosen Berhasil ditambahkan");
+        setErrorMessages([]); // Reset error message
+        navigate("/dosen"); // Replace with the appropriate path
+      } else if (response.status === 400) {
+        // Handle validation errors
+        setErrorMessages(response.data.error);
       } else {
-        console.error("Gagal menambahkan dosen");
+        console.error("API Error:", response.status, response.statusText);
       }
     } catch (error) {
-      console.log(error.message);
+      if (error.response) {
+        // Handle specific API error here
+        setErrorMessages(error.response.data.error);
+      } else {
+        console.error("Unexpected Error:", error);
+      }
     }
   };
 
@@ -78,6 +89,21 @@ function DosenTambah() {
             <span className="text-sky-600 text-xl font-semibold ">Tambah</span>
           </h2>
         </div>
+
+        <div role="alert" className="mb-3">
+          <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+            Warning!!
+          </div>
+          <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+            <p>
+              {" "}
+              {errorMessages && (
+                <div className="text-red-500">{errorMessages}</div>
+              )}
+            </p>
+          </div>
+        </div>
+
         <div className="container w-[976px] h-full rounded-lg overflow-hidden bg-white p-5">
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className="mb-4 flex flex-row justify-between">
