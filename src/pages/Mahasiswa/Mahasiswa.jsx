@@ -10,50 +10,54 @@ function Mahasiswa() {
   useEffect(() => {
     // Mengambil token dari local storage
     const token = localStorage.getItem("token");
-  
+
     // Melakukan permintaan HTTP dengan token
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "api/v1/mahasiswa",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get("api/v1/mahasiswa", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         // Menggunakan data dari server
         setMahasiswa(response.data.values);
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
     };
-  
+
     if (token) {
       fetchData();
     }
   }, []);
-  
 
   const handleDeleteMahasiswa = async (id_mahasiswa) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`/api/v1/hapusdatamahasiswa/${id_mahasiswa}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-  
+      const response = await axios.delete(
+        `/api/v1/hapusdatamahasiswa/${id_mahasiswa}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("API Response:", response.data);
       // Jika penghapusan berhasil, perbarui state mahasiswaData
-      setMahasiswa((prevData) => prevData.filter(mahasiswa => mahasiswa.id_mahasiswa !== id_mahasiswa));
+      setMahasiswa((prevData) => {
+        console.log("Previous Mahasiswa Data:", prevData);
+        console.log("Deleting Mahasiswa ID:", id_mahasiswa);
+
+        return prevData.filter(
+          (mahasiswa) => mahasiswa.id_mahasiswa !== id_mahasiswa
+        );
+      });
       console.log("Mahasiswa dihapus dengan sukses");
     } catch (error) {
       console.error("Error menghapus data:", error.message);
     }
   };
-  
-  
-
 
   return (
     <Layout>
@@ -90,13 +94,16 @@ function Mahasiswa() {
                       {mahasiswa.status}
                     </td>
                     <td className="border p-2 text-center flex justify-between">
-                      <Link to={`ubah-mahasiswa/${mahasiswa.id_mahasiswa}`}
+                      <Link
+                        to={`ubah-mahasiswa/${mahasiswa.id_mahasiswa}`}
                         className="color"
                       >
                         <Pencil stroke="#26A1F4" />
                       </Link>
                       <button
-                        onClick={() => handleDeleteMahasiswa(mahasiswa.id_mahasiswa)}
+                        onClick={() =>
+                          handleDeleteMahasiswa(mahasiswa.id_mahasiswa)
+                        }
                       >
                         <Trash2 stroke="#BF0404" />
                       </button>
