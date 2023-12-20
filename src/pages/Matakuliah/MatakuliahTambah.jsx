@@ -9,10 +9,8 @@ function MatakuliahTambah() {
     gambar: null,
     kode_matakuliah: "",
     sks: "",
-    jam_mulai: "",
-    jam_selesai: ""
   });
-
+  const [errorMessages, setErrorMessages] = useState([]);
 
 
   const navigate = useNavigate();
@@ -50,6 +48,9 @@ function MatakuliahTambah() {
         console.log("Matakuliah berhasil ditambahkan");
         alert("Matakuliah Berhasil di tambahkan")
         navigate("/matakuliah"); // Ganti dengan path yang sesuai
+      } else if (response.status === 400) {
+        // Handle validation errors
+        setErrorMessages(response.data.error);
       } else {
         console.error("Gagal menambahkan Matakuliah");
       }
