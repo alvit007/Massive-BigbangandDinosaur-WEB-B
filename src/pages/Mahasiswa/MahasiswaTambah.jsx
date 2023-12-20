@@ -17,7 +17,7 @@ function MahasiswaTambah() {
     nama_kelas: "",
     notlp: "",
   });
-   const [errorMessages, setErrorMessages] = useState([]);
+  const [errorMessages, setErrorMessages] = useState([]);
 
   const navigate = useNavigate();
 
